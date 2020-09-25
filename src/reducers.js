@@ -1,8 +1,7 @@
 const initialState = {
     // holds the auth user data if not null
     userData: {
-        displayPic: "",
-        displayName: "",
+        name: "",
         email: "",
         games: [],
         wishlist: [],
