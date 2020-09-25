@@ -1,3 +1,7 @@
+html body {
+  background-color: #282c34;
+}
+
 .App {
   text-align: center;
 }
@@ -24,6 +28,12 @@ a:active {
 
 .App-logo {
   margin-left: 0.5em;
+  background-color: #282c34;
+  color: #61dafb;
+}
+
+.App-logo:hover {
+  color: #38d0fa;
 }
 
 .App-header {
@@ -35,6 +45,7 @@ a:active {
   justify-content: flex-start;
   font-size: 1.2em;
   color: rgb(77, 67, 104);
+  border-bottom: solid 3px #61dafb;
 }
 
 .App-link {
@@ -45,4 +56,8 @@ a:active {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.App-color {
+  color: #61dafb;
 }

@@ -2,9 +2,20 @@ import os
 from flask import Flask, jsonify, request, abort
 from flask_cors import CORS
 from pymongo import MongoClient
+from bson import json_util
+from flask.json import JSONEncoder
+from dotenv import load_dotenv
+load_dotenv()
+
+
+# define a custom encoder point to the json_util provided by pymongo (or its dependency bson)
+class CustomJSONEncoder(JSONEncoder):
+    def default(self, obj): return json_util.default(obj)
+
 
 app = Flask(__name__, static_folder='build', static_url_path='')
 CORS(app)
+app.json_encoder = CustomJSONEncoder
 
 client = MongoClient(os.environ.get('MONGODB_URI'))
 db = client.gameo
@@ -26,8 +37,8 @@ def favicon():
 def add_user():
     req_body = request.get_json()
     post_data = {
-        'email': req_body.email,
-        'name': req_body.name,
+        'email': req_body['email'],
+        'name': req_body['name'],
         'games': [],
         'wishlist': [],
     }

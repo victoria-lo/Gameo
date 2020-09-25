@@ -11,6 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Home from "./components/Home";
 import Nav from "./components/Nav";
+import SignIn from "./components/SignIn";
 
 function App() {
   const store = createStore(reducers, applyMiddleware(thunk));
@@ -22,6 +23,7 @@ function App() {
                   <Nav />
                   <Switch>
                       <Route exact path="/" component={Home} />
+                      <Route exact path="/signin" component={SignIn} />
                       <Route
                           path="*"
                           render={() => (
