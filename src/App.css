@@ -48,6 +48,15 @@ a:active {
   border-bottom: solid 3px #61dafb;
 }
 
+#sidebar {
+  position: absolute;
+  background-color: #282c34 !important;
+  top: 5vh;
+  height: 100%;
+  width: 15em;
+  text-align: left !important;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -91,4 +100,23 @@ a:active {
 
 .btn:focus {
   box-shadow: none !important;
+}
+
+.list-group-item {
+  background-color: #282c34 !important;
+  color: #61dafb !important;
+}
+
+.list-group-item:focus {
+  border-color: #282c34 !important;
+}
+
+.list-group-item:hover {
+  background-color: #21252b !important;
+  color: #61dafb !important;
+}
+
+.inline-icon {
+  margin-right: 1em;
+  cursor: pointer;
 }

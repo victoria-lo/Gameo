@@ -12,6 +12,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./components/Home";
 import Nav from "./components/Nav";
 import SignIn from "./components/SignIn";
+import SideBar from "./components/SideBar";
 
 function App() {
   const store = createStore(reducers, applyMiddleware(thunk));
@@ -20,6 +21,7 @@ function App() {
           <AuthProvider>
               <Router>
                   <div className="App">
+                  <SideBar/>
                   <Nav />
                   <Switch>
                       <Route exact path="/" component={Home} />
@@ -27,7 +29,7 @@ function App() {
                       <Route
                           path="*"
                           render={() => (
-                              <div>
+                              <div className="App-color" style={{ marginTop: '2em'}}>
                                   <h1>404 Error</h1>
                                   <p>
                                       The page you've requested could not be found. The
