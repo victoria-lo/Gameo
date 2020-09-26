@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
     // holds the auth user data if not null
     userData: {
         name: "",

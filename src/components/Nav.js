@@ -3,9 +3,11 @@ import "../App.css";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Firebase/context.js";
 import { connect, useDispatch } from "react-redux";
-
+import app from "../Firebase/config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faGamepad} from "@fortawesome/free-solid-svg-icons";
+import {faCog, faGamepad, faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
+import { Dropdown } from "react-bootstrap";
+import { initialState } from "../reducers";
 
 import { getUser, createUser } from '../actions';
 
@@ -41,6 +43,33 @@ function Nav(props) {
                     <FontAwesomeIcon icon={faGamepad} size={'2x'}/>
                 </Link>
             </div>
+            {!!user ? (
+                <Dropdown style={{ marginLeft: 'auto', marginRight: '1em'}}>
+                    <Dropdown.Toggle style={{ backgroundColor: '#61dafb', color: '#282c34', outline: "none"}}>
+                        {user.displayName}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item href="/" onClick={() => {
+                            dispatch({
+                                type: "USER_DATA",
+                                payload: initialState.userData,
+                            });
+                            app.auth().signOut();
+                        }}>
+                            <FontAwesomeIcon icon={faSignOutAlt}/>{" "}
+                            Sign out
+                        </Dropdown.Item>
+                        <Dropdown.Item>
+                            <FontAwesomeIcon icon={faCog}/>{" "}
+                            Settings
+                        </Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+            ) : (
+                <Link to="/signin">
+                    <button id="signin-btn" style={{ marginLeft: 'auto'}} className="App-color">Sign In / Register</button>
+                </Link>
+            )}
         </header>
     );
 }
