@@ -75,8 +75,21 @@ def predict(user_id):
     return recommendations
 
 
-def added_rating(title, platform, userscore, username, user_id, title_id):
+def added_rating(title, platform, userscore, username):
     global game_ratings
+
+    username_exist = username in game_ratings['Username'].unique()
+    if not username_exist:
+        user_id = len(game_ratings['Username'].unique())
+    else:
+        user_id = game_ratings[game_ratings['Username'] == username]['UserId'].values[0]
+
+    game_exist = username in game_ratings['Title'].unique()
+    if not game_exist:
+        title_id = len(game_ratings['Title'].unique())
+    else:
+        title_id = game_ratings[game_ratings['Title'] == title]['TitleId'].values[0]
+
     new_row = {'Title': title,
                'Platform': platform,
                'Userscore': userscore,
