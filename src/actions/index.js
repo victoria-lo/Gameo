@@ -46,7 +46,6 @@ export const getUser = (email) => {
 };
 
 export const getTopGames = () => {
-    console.log(process.env.REACT_APP_TWITCH_CLIENT_ID)
     return new Promise((resolve, reject) => {
         axios
             .get("https://api.twitch.tv/helix/games/top?first=60",{
@@ -70,9 +69,24 @@ export const getTopGames = () => {
                         if (!res || !res.data)
                             reject({ stat: 500, msg: "Something went wrong" });
                         const notGames = res.data.data;
-                        console.log(notGames)
-                        topGames = topGames.filter(el => !notGames.find(rm => (rm.name === el.name))).slice(0, 48)
-                        resolve(topGames);
+                        topGames = topGames.filter(el => !notGames.find(rm => (rm.name === el.name)))
+                        axios
+                            .get("https://api.twitch.tv/helix/search/categories?query=creative",{
+                                headers: {
+                                    'client-id': process.env.REACT_APP_TWITCH_CLIENT_ID,
+                                    'Authorization': 'Bearer ' + process.env.REACT_APP_TWITCH_AUTH_TOKEN
+                                }
+                            })
+                            .then((res) => {
+                                if (!res || !res.data)
+                                    reject({ stat: 500, msg: "Something went wrong" });
+                                const notGames = res.data.data;
+                                topGames = topGames.filter(el => !notGames.find(rm => (rm.name === el.name))).slice(0, 48)
+                                resolve(topGames);
+                            })
+                            .catch((err) => {
+                                reject(err);
+                            });
                     })
                     .catch((err) => {
                         reject(err);
