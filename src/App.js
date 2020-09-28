@@ -31,7 +31,7 @@ function App() {
                       <Route
                           path="*"
                           render={() => (
-                              <div className="App-color" style={{ marginTop: '2em'}}>
+                              <div className="App-color" style={{ paddingTop: '8em'}}>
                                   <h1>404 Error</h1>
                                   <p>
                                       The page you've requested could not be found. The
