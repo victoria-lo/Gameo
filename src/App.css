@@ -1,5 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
 html body {
   background-color: #191919;
+  margin: 0;
+  padding: 0;
 }
 
 .App {
@@ -46,10 +52,13 @@ a:active {
   font-size: 1.2em;
   color: rgb(77, 67, 104);
   border-bottom: solid 3px #61dafb;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
 }
 
 #sidebar {
-  position: absolute;
+  position: fixed;
   background-color: #282c34 !important;
   top: 5vh;
   height: 100%;
@@ -119,4 +128,29 @@ a:active {
 .inline-icon {
   margin-right: 1em;
   cursor: pointer;
+}
+
+#top-games {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  top: 6em;
+  left: 15em;
+  justify-content: center;
+  margin-left: auto;
+}
+
+#game-card {
+  margin: 1em;
+  max-width: 242px;
+  border: 1px solid #61dafb;
+}
+
+#game-card .title{
+  padding: 0.5em;
+}
+
+#account-dropdown {
+  margin-right: 1em;
+  margin-left: auto;
 }

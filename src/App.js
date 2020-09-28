@@ -13,6 +13,7 @@ import Home from "./components/Home";
 import Nav from "./components/Nav";
 import SignIn from "./components/SignIn";
 import SideBar from "./components/SideBar";
+import Trending from "./components/Trending";
 
 function App() {
   const store = createStore(reducers, applyMiddleware(thunk));
@@ -26,6 +27,7 @@ function App() {
                   <Switch>
                       <Route exact path="/" component={Home} />
                       <Route exact path="/signin" component={SignIn} />
+                      <Route exact path="/trending" component={Trending} />
                       <Route
                           path="*"
                           render={() => (

@@ -7,7 +7,7 @@ import {ListGroup} from "react-bootstrap";
 function SideBar() {
 
     return (
-        <div className="float-left" id="sidebar">
+        <div id="sidebar">
             <ListGroup>
                 <ListGroup.Item action href="/">
                     <FontAwesomeIcon icon={faHome} className="inline-icon" /> Home

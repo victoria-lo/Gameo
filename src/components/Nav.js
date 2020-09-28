@@ -44,7 +44,7 @@ function Nav(props) {
                 </Link>
             </div>
             {!!user ? (
-                <Dropdown style={{ marginLeft: 'auto', marginRight: '1em'}}>
+                <Dropdown id="account-dropdown">
                     <Dropdown.Toggle style={{ backgroundColor: '#61dafb', color: '#282c34', outline: "none"}}>
                         {user.displayName}
                     </Dropdown.Toggle>
