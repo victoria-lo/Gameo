@@ -121,3 +121,71 @@ function getGameInfo(game) {
             });
     });
 }
+
+//================================== CONNECT TO BACK-END ROUTES =========================================================================
+export const getRecommendations = (email) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .get(PREFIX + "/user?email=" + email)
+            .then((res) => {
+                if (!res || !res.data)
+                    reject({ stat: 500, msg: "Something went wrong" });
+                resolve(res.data);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+};
+
+export const addGame = (id, list, data) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .post(PREFIX + "/game?id=" + id + "&list=" + list, {
+                game_id: data.gameId,
+                title: data.title,
+                genres: data.genres,
+                platform: data.platform,
+            })
+            .then((res) => {
+                if (!res || !res.data)
+                    reject({ stat: 500, msg: "Something went wrong" });
+                resolve(res.data);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+};
+
+export const deleteGame = (id, list, game) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .patch(PREFIX + "/game?id=" + id + "&list=" + list + "&game=" + game)
+            .then((res) => {
+                if (!res || !res.data)
+                    reject({ stat: 500, msg: "Something went wrong" });
+                resolve(res.data);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+};
+
+export const rateGame = (id, game, rating) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .patch(PREFIX + "/game?id=" + id + "&game=" + game, {
+                rating: rating,
+            })
+            .then((res) => {
+                if (!res || !res.data)
+                    reject({ stat: 500, msg: "Something went wrong" });
+                resolve(res.data);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+};
