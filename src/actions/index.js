@@ -77,11 +77,14 @@ export const getTopGames = () => {
                                     'Authorization': 'Bearer ' + process.env.REACT_APP_TWITCH_AUTH_TOKEN
                                 }
                             })
-                            .then((res) => {
+                            .then(async (res) => {
                                 if (!res || !res.data)
                                     reject({ stat: 500, msg: "Something went wrong" });
                                 const notGames = res.data.data;
                                 topGames = topGames.filter(el => !notGames.find(rm => (rm.name === el.name))).slice(0, 48)
+                                topGames = await Promise.all(topGames.map(async game =>
+                                    getGameInfo(game)
+                                ));
                                 resolve(topGames);
                             })
                             .catch((err) => {
@@ -97,3 +100,24 @@ export const getTopGames = () => {
             });
     });
 };
+
+//======================================================================================================================
+function getGameInfo(game) {
+    return new Promise((resolve, reject) => {
+        axios
+            .get("https://api.rawg.io/api/games?search=" + game.name,)
+            .then((res) => {
+                if (!res || !res.data)
+                    reject({ stat: 500, msg: "Something went wrong" });
+                if (res.data.results.length > 0) {
+                    const info = res.data.results[0];
+                    resolve({...game, info});
+                }
+                else
+                    reject("No game found");
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+}
