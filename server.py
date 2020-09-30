@@ -142,7 +142,6 @@ def add_user():
 @app.route('/game', methods=["POST"])
 def add_game():
     _id = request.args.get('id') #user ID
-
     add_to_list = request.args.get('list')
     if add_to_list != ('games' or 'wishlist'):
         abort(404)
@@ -150,7 +149,7 @@ def add_game():
     post_data = {
         'game_id': req_body['id'], #not MongoDB ID
         'title': req_body['title'],
-        'genres': [],
+        'genres': req_body['genres'],
         'platform': req_body['platform'],
         'rating':None
     }
@@ -175,7 +174,7 @@ def get_user():
 @app.route('/game', methods=["PATCH"])
 def delete_game():
     _id = request.args.get('id') #user ID
-    game_id = request.args.get('game_id') #game ID
+    game_id = request.args.get('game') #game ID
     remove_from_list = request.args.get('list')
 
     if remove_from_list != ('games' or 'wishlist'):
@@ -189,13 +188,17 @@ def delete_game():
 @app.route('/rate', methods=["PATCH"])
 def rate_game():
     _id = request.args.get('id') #user ID
-    game_id = request.args.get('game_id') #game ID
+    game_id = request.args.get('game') #game ID
     req_body = request.get_json()
     rating = req_body['rating']
-    user = User.find_one_and_update({'_id':_id, 'games.game_id': game_id},{'$set': { "games.$.rating" : rating})
+    user = User.find_one_and_update({'_id':_id, 'games.game_id': game_id},{'$set': { "games.$.rating" : rating}})
     if not user:
         abort(404)
-
+    
+    # append rated game to data frame
+    # re train model
+    # get new recommendations
+    return jsonify({'user': user})
 
 
 if __name__ == "__main__":
