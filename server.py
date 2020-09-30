@@ -170,6 +170,17 @@ def get_user():
         abort(404)
     return jsonify({'user': user})
 
+@app.route('/game', methods=["GET"])
+def get_game():
+    _id = request.args.get('id') #user ID
+
+    user = User.find_one({'_id': _id})
+    if not user:
+        abort(404)
+
+    # get new recommendations
+    return jsonify(predict(_id))
+
 # ====================================== PATCH METHODS ==================================================
 @app.route('/game', methods=["PATCH"])
 def delete_game():
@@ -195,9 +206,19 @@ def rate_game():
     if not user:
         abort(404)
     
+    get_game = User.find_one({'_id':_id, { 'games': { '$elemMatch': { 'game_id': game_id } } })
+    # returns {_id:userID, games:[{_id: gameID, title: title, genres: genres, platform: platform, rating: rating }]}
+
+    game = get_game['games'][0]
+
     # append rated game to data frame
+    added_rating(game['title'], game['platform'], game['rating'], game['email'])
+    
     # re train model
-    # get new recommendations
+    train()
+
+    
+    
     return jsonify({'user': user})
 
 

@@ -107,10 +107,10 @@ export const getTopGames = () => {
 };
 
 //================================== CONNECT TO BACK-END ROUTES =========================================================================
-export const getRecommendations = (email) => {
+export const getRecommendations = (id) => {
   return new Promise((resolve, reject) => {
     axios
-      .get(PREFIX + "/user?email=" + email)
+      .get(PREFIX + "/game?id=" + id)
       .then((res) => {
         if (!res || !res.data)
           reject({ stat: 500, msg: "Something went wrong" });
