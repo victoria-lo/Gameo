@@ -68,6 +68,11 @@ a:active {
 
 .App-link {
   color: #61dafb;
+  cursor: pointer;
+}
+
+.App-link:hover {
+  color: white !important;
 }
 
 .App-center {
@@ -148,9 +153,21 @@ a:active {
 
 #game-card .title{
   padding: 0.5em;
+  height: 5em;
 }
 
 #account-dropdown {
   margin-right: 1em;
   margin-left: auto;
 }
+
+.App-button {
+  background-color: #61dafb !important;
+  color: #282c34 !important;
+  outline: none !important;
+}
+
+.relative-btn {
+  position: relative;
+}
+

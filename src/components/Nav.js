@@ -45,7 +45,7 @@ function Nav(props) {
             </div>
             {!!user ? (
                 <Dropdown id="account-dropdown">
-                    <Dropdown.Toggle style={{ backgroundColor: '#61dafb', color: '#282c34', outline: "none"}}>
+                    <Dropdown.Toggle className="App-button">
                         {user.displayName}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>

@@ -10,6 +10,7 @@ function Trending() {
     useEffect(() => {
         getTopGames()
             .then(data => {
+                console.log(data)
                 setTopGames(data)
             })
     }, [])
