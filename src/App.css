@@ -149,11 +149,11 @@ a:active {
   margin: 1em;
   max-width: 242px;
   border: 1px solid #61dafb;
+  height: 36em;
 }
 
 #game-card .title{
   padding: 0.5em;
-  height: 5em;
 }
 
 #account-dropdown {
@@ -165,10 +165,6 @@ a:active {
   background-color: #61dafb !important;
   color: #282c34 !important;
   outline: none !important;
-}
-
-.relative-btn {
-  position: relative;
 }
 
 .loader {
