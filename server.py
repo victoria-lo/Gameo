@@ -113,6 +113,7 @@ app.json_encoder = CustomJSONEncoder
 client = MongoClient(os.environ.get('MONGODB_URI'))
 db = client.gameo
 User = db.users
+Game = db.games
 
 
 @app.route('/', methods=["GET"])
@@ -138,6 +139,27 @@ def add_user():
     User.insert_one(post_data)
     return jsonify({'user': post_data})
 
+@app.route('/game', methods=["POST"])
+def add_game():
+    _id = request.args.get('id') #user ID
+
+    add_to_list = request.args.get('list')
+    if add_to_list != ('games' or 'wishlist'):
+        abort(404)
+    req_body = request.get_json()
+    post_data = {
+        'game_id': req_body['id'], #not MongoDB ID
+        'title': req_body['title'],
+        'genres': [],
+        'platform': req_body['platform'],
+        'rating':None
+    }
+
+    user = User.find_one_and_update({'_id':_id},{'$push': {add_to_list: post_data}})
+    if not user:
+        abort(404)
+    return jsonify({'user': user})
+
 
 # ====================================== GET METHODS ==================================================
 @app.route('/user', methods=["GET"])
@@ -148,6 +170,32 @@ def get_user():
     if not user:
         abort(404)
     return jsonify({'user': user})
+
+# ====================================== PATCH METHODS ==================================================
+@app.route('/game', methods=["PATCH"])
+def delete_game():
+    _id = request.args.get('id') #user ID
+    game_id = request.args.get('game_id') #game ID
+    remove_from_list = request.args.get('list')
+
+    if remove_from_list != ('games' or 'wishlist'):
+        abort(404)
+
+    user = User.find_one_and_update({'_id':_id},{'$pull': {remove_from_list: {'game_id': game_id}}})
+    if not user:
+        abort(404)
+    return jsonify({'user': user})
+
+@app.route('/rate', methods=["PATCH"])
+def rate_game():
+    _id = request.args.get('id') #user ID
+    game_id = request.args.get('game_id') #game ID
+    req_body = request.get_json()
+    rating = req_body['rating']
+    user = User.find_one_and_update({'_id':_id, 'games.game_id': game_id},{'$set': { "games.$.rating" : rating})
+    if not user:
+        abort(404)
+
 
 
 if __name__ == "__main__":
