@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import "../App.css";
 import {getTopGames} from "../actions";
 import GameCard from "./GameCard";
+import Loading from "./Loading";
 
 function Trending() {
 
@@ -16,9 +17,14 @@ function Trending() {
     }, [])
 
     return (
-        <div id="top-games">
-            {topGames.map(game => <GameCard game={game}/>)}
-        </div>
+
+            topGames.length > 0 ?
+                <div id="top-games">
+                {topGames.map(game => <GameCard game={game}/>)}
+                </div>
+            :
+                <Loading/>
+
     );
 }
 
