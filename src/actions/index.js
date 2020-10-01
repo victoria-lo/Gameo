@@ -109,7 +109,7 @@ export const getTopGames = () => {
   });
 };
 
-//======================================================================================================================
+//=================================== HELPER FUNCTION ==================================================================
 function getGameInfo(game) {
   return new Promise((resolve, reject) => {
     axios
@@ -119,7 +119,17 @@ function getGameInfo(game) {
           reject({ stat: 500, msg: "Something went wrong" });
         if (res.data.results.length > 0) {
           const info = res.data.results[0];
-          resolve({ ...game, info });
+          axios
+              .get("https://api.rawg.io/api/games/" + info.id)
+              .then((res) => {
+                if (!res || !res.data)
+                  reject({ stat: 500, msg: "Something went wrong" });
+                const info = res.data;
+                resolve({ ...game, info });
+              })
+              .catch((err) => {
+                reject(err);
+              });
         } else reject("No game found");
       })
       .catch((err) => {

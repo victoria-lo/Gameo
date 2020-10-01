@@ -149,7 +149,7 @@ a:active {
   margin: 1em;
   max-width: 242px;
   border: 1px solid #61dafb;
-  height: 36em;
+  height: 33em;
 }
 
 #game-card .title{
@@ -169,7 +169,7 @@ a:active {
 
 .loader {
   border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
+  border-top: 16px solid #61dafb; /* Blue */
   border-radius: 50%;
   width: 120px;
   height: 120px;
@@ -189,5 +189,22 @@ a:active {
   margin-left: auto;
   text-align: center;
   align-items: center;
+}
+
+#game-info .modal-content {
+  margin-top: 7em;
+  width: 300%;
+  right: 100%;
+  background-color: #191919;
+  color: white;
+  border: 1px solid #61dafb;
+}
+
+.modal-header {
+  border-bottom: none !important;
+}
+
+.modal-footer {
+  border-top: none !important;
 }
 
