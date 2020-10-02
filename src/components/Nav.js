@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "../App.css";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Firebase/context.js";
@@ -8,10 +8,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faCog, faGamepad, faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
 import { Dropdown } from "react-bootstrap";
 import { initialState } from "../reducers";
-
-import { getUser, createUser } from '../actions';
+import ReactSearchBox from 'react-search-box';
+import {getUser, createUser, searchGame, getGameDetails} from '../actions';
+import GameInfo from "./GameInfo";
 
 function Nav(props) {
+
+    const [search, setSearch] = useState("");
+    const [games, setGames] = useState([]);
+    const [game, setGame] = useState({info: {genres: [], platforms: []}});
+    const [showModal, setShowModal] = useState(false);
     const { user } = useContext(AuthContext);
     const dispatch = useDispatch();
 
@@ -43,6 +49,30 @@ function Nav(props) {
                     <FontAwesomeIcon icon={faGamepad} size={'2x'}/>
                 </Link>
             </div>
+            <div style={{ float: 'left', top: '0.7em', left: '35em', width: '50%', zIndex: '100', position: 'absolute'}}>
+            <ReactSearchBox
+                placeholder="Search"
+                data={games}
+                onSelect={record => {
+                    getGameDetails(record)
+                        .then(data => {
+                            setGame(data)
+                            setShowModal(true);
+                        })
+                }}
+                onChange={value => {
+                    setSearch(value)
+                    searchGame(value)
+                        .then(games => {
+                            setGames(games.map(game => ({...game, value: game.name})))
+                        })
+                }}
+                fuseConfigs={{
+                    threshold: 0.3,
+                }}
+                value={search}
+            />
+            </div>
             {!!user ? (
                 <Dropdown id="account-dropdown">
                     <Dropdown.Toggle className="App-button">
@@ -70,6 +100,7 @@ function Nav(props) {
                     <button id="signin-btn" style={{ marginLeft: 'auto'}} className="App-color">Sign In / Register</button>
                 </Link>
             )}
+            <GameInfo showModal={showModal} setShowModal={setShowModal} game={game}/>
         </header>
     );
 }

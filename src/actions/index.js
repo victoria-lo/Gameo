@@ -109,6 +109,38 @@ export const getTopGames = () => {
   });
 };
 
+export const searchGame = (game) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .get("https://api.rawg.io/api/games?search=" + game)
+            .then((res) => {
+                if (!res || !res.data)
+                    reject({ stat: 500, msg: "Something went wrong" });
+                resolve(res.data.results);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+}
+
+export const getGameDetails = (game) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .get("https://api.rawg.io/api/games/" + game.id)
+            .then((res) => {
+                if (!res || !res.data)
+                    reject({ stat: 500, msg: "Something went wrong" });
+                const info = res.data;
+                resolve({ ...game, info });
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+}
+
+
 //=================================== HELPER FUNCTION ==================================================================
 function getGameInfo(game) {
   return new Promise((resolve, reject) => {
