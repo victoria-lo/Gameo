@@ -70,7 +70,7 @@ export const getTopGames = () => {
               reject({ stat: 500, msg: "Something went wrong" });
             const notGames = res.data.data;
             topGames = topGames.filter(
-              (el) => !notGames.find((rm) => rm.name === el.name)
+              (el) => !notGames.find((rm) => (rm.name === el.name) || (el.name === "Slots"))
             );
             axios
               .get(
