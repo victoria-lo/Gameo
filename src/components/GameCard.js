@@ -16,7 +16,7 @@ function GameCard(props) {
                 }}>{props.game.name}
             </h5>
             {props.game.info.genres.slice(0, 3).map(genre =>
-                <Button style={{margin: '0.2em'}} variant="dark">{genre.name}</Button>
+                <Button style={{margin: '0.3em'}} variant="dark">{genre.name}</Button>
             )}
             <GameInfo showModal={showModal} setShowModal={setShowModal} game={props.game}/>
         </div>
