@@ -206,10 +206,10 @@ def rate_game():
     if not user:
         abort(404)
     
-    get_game = User.find_one({'_id':_id, { 'games': { '$elemMatch': { 'game_id': game_id } } })
+    user_with_game = User.find_one({'_id': _id, 'games': {'$elemMatch': {'game_id': game_id}}})
     # returns {_id:userID, games:[{_id: gameID, title: title, genres: genres, platform: platform, rating: rating }]}
 
-    game = get_game['games'][0]
+    game = user_with_game['games'][0]
 
     # append rated game to data frame
     added_rating(game['title'], game['platform'], game['rating'], game['email'])
@@ -217,8 +217,6 @@ def rate_game():
     # re train model
     train()
 
-    
-    
     return jsonify({'user': user})
 
 
