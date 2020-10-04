@@ -47,11 +47,13 @@ export const addGame = (email, list, data) => {
   };
 };
 
-export const deleteGame = (email, list, game) => {
+export const deleteGame = (email, newlist) => {
   return (dispatch) => {
     axios
       .patch(
-        PREFIX + "/remove?email=" + email + "&list=" + list + "&game=" + game
+        PREFIX + "/remove?email=" + email, {
+            list: newlist
+          }
       )
       .then((res) => {
         return res.data;

@@ -25,24 +25,25 @@ function GameInfo(props) {
     if (user == null) {
       window.location.replace("/signin");
     } else {
-      console.log(props.userData.email, list, game.info.id);
-      props.deleteGame(props.userData.email, list, game.info.id);
+      console.log(list)
+      props.deleteGame(props.userData.email, list);
     }
   };
 
   const displayAddButton = (game, list) => {
-    if (props.userData) {
-      if (list == "games") {
-        let exists = (props.userData.games || []).filter(
-          (gam) => gam.game_id === game.info.id
+    if (props.userData.games) {
+      if (list === "games") {
+        let removedGame = props.userData.games.filter(
+          (gam) => gam.game_id !== game.info.id
         );
-        if (exists.length > 0) {
+        if (removedGame.length !== props.userData.games.length) { // game exists in library
+          const newList = {games: removedGame}
           return (
             <Button
               style={{ marginRight: "1em" }}
               className="App-button"
               onClick={() => {
-                deleteFromList(game, list);
+                deleteFromList(game, newList);
               }}
             >
               Remove from Library
@@ -62,15 +63,16 @@ function GameInfo(props) {
           );
         }
       } else {
-        let exists = (props.userData.wishlist || []).filter(
-          (gam) => gam.game_id === game.info.id
+        let removedGame = props.userData.wishlist.filter(
+          (gam) => gam.game_id !== game.info.id
         );
-        if (exists.length > 0) {
+        if (removedGame.length !== props.userData.wishlist.length) { // game exists in wishlist
+          const newList = {wishlist: removedGame}
           return (
             <Button
               className="App-button"
               onClick={() => {
-                deleteFromList(game, list);
+                deleteFromList(game, newList);
               }}
             >
               Remove Wish List

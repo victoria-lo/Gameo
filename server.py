@@ -151,6 +151,7 @@ def get_user():
         abort(404)
     return jsonify({'user': user})
 
+
 @app.route('/game', methods=["GET"])
 def get_game():
     email = request.args.get('email') #user ID
@@ -161,6 +162,7 @@ def get_game():
 
     # get new recommendations
     return jsonify(predict(email))
+
 
 # ====================================== PATCH METHODS ==================================================
 @app.route('/game', methods=["PATCH"])
@@ -183,17 +185,13 @@ def add_game():
         abort(404)
     return jsonify({'user': user})
 
+
 @app.route('/remove', methods=["PATCH"])
 def delete_game():
     email = request.args.get('email')
-    game_id = request.args.get('game')
-    remove_from_list = request.args.get('list')
+    new_list = request.get_json()['list']
 
-    if remove_from_list != 'games' and remove_from_list != 'wishlist':
-        print("bo list")
-        abort(404)
-
-    user = User.find_one_and_update({'email': email}, {'$pull': {'games': {'game_id': game_id}}})
+    user = User.find_one_and_update({'email': email}, {'$set': new_list})
 
     print(user)
 
@@ -201,6 +199,7 @@ def delete_game():
         print("bo user")
         abort(404)
     return jsonify({'user': user})
+
 
 @app.route('/rate', methods=["PATCH"])
 def rate_game():
