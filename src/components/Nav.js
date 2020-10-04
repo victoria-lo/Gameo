@@ -6,7 +6,7 @@ import { connect, useDispatch } from "react-redux";
 import app from "../Firebase/config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faCog, faGamepad, faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
-import { Dropdown } from "react-bootstrap";
+import { Dropdown, Button } from "react-bootstrap";
 import { initialState } from "../reducers";
 import ReactSearchBox from 'react-search-box';
 import {getUser, createUser, searchGame, getGameDetails} from '../actions';
@@ -96,9 +96,11 @@ function Nav(props) {
                     </Dropdown.Menu>
                 </Dropdown>
             ) : (
-                <Link to="/signin">
-                    <button id="signin-btn" style={{ marginLeft: 'auto'}} className="App-color">Sign In / Register</button>
-                </Link>
+                <div id="signin-btn">
+                    <Link to="/signin">
+                        <Button className="App-button">Sign In / Register</Button>
+                    </Link>
+                </div>
             )}
             <GameInfo showModal={showModal} setShowModal={setShowModal} game={game}/>
         </header>

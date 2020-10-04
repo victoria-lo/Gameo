@@ -18,8 +18,8 @@ function SideBar() {
                 <ListGroup.Item action href="/library">
                     <FontAwesomeIcon icon={faThList} className="inline-icon"/> My Library
                 </ListGroup.Item>
-                <ListGroup.Item action href="/recommendations">
-                    <FontAwesomeIcon icon={faStar} className="inline-icon"/> Recommendations
+                <ListGroup.Item action href="/wishlist">
+                    <FontAwesomeIcon icon={faStar} className="inline-icon"/> My Wishlist
                 </ListGroup.Item>
             </ListGroup>
         </div>

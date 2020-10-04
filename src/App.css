@@ -135,7 +135,7 @@ a:active {
   cursor: pointer;
 }
 
-#top-games {
+#games {
   position: absolute;
   display: flex;
   flex-wrap: wrap;
@@ -159,6 +159,13 @@ a:active {
 #account-dropdown {
   margin-right: 1em;
   margin-left: auto;
+}
+
+#signin-btn {
+  margin-right: 1em;
+  margin-left: auto;
+  text-align: right;
+  float: right;
 }
 
 .App-button {

@@ -21,7 +21,7 @@ function SignIn() {
     };
 
     return (
-        <div style={{ paddingTop: "1.2rem", minHeight: "80vh" }}>
+        <div style={{ paddingTop: "4.5rem", minHeight: "80vh" }}>
             {!!user ? (
                 <Redirect to={{ pathname: "/" }} />
             ) : (

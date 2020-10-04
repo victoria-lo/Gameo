@@ -19,7 +19,7 @@ function Trending() {
     return (
 
             topGames.length > 0 ?
-                <div id="top-games">
+                <div id="games">
                 {topGames.map(game => <GameCard game={game}/>)}
                 </div>
             :
