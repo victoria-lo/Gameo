@@ -27,6 +27,62 @@ export const createUser = (email, displayName) => {
   };
 };
 
+export const addGame = (email, list, data) => {
+  return (dispatch) => {
+    axios
+      .patch(PREFIX + "/game?email=" + email + "&list=" + list, {
+        game_id: data.gameId,
+        title: data.title,
+      })
+      .then((res) => {
+        return res.data;
+      })
+      .then((data) => {
+        console.log(data);
+        dispatch({ type: "USER_DATA", payload: data });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+export const deleteGame = (email, list, game) => {
+  return (dispatch) => {
+    axios
+      .patch(
+        PREFIX + "/remove?email=" + email + "&list=" + list + "&game=" + game
+      )
+      .then((res) => {
+        return res.data;
+      })
+      .then((data) => {
+        dispatch({ type: "USER_DATA", payload: data });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+export const rateGame = (email, game, rating) => {
+  return (dispatch) => {
+    axios
+      .patch(PREFIX + "/game?id=" + email + "&game=" + game, {
+        rating: rating,
+      })
+      .then((res) => {
+        return res.data;
+      })
+      .then((data) => {
+        dispatch({ type: "USER_DATA", payload: data });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
 //================================== PROMISES =========================================================================
 
 export const getUser = (email) => {
@@ -70,7 +126,10 @@ export const getTopGames = () => {
               reject({ stat: 500, msg: "Something went wrong" });
             const notGames = res.data.data;
             topGames = topGames.filter(
-              (el) => !notGames.find((rm) => (rm.name === el.name) || (el.name === "Slots"))
+              (el) =>
+                !notGames.find(
+                  (rm) => rm.name === el.name || el.name === "Slots"
+                )
             );
             axios
               .get(
@@ -110,36 +169,35 @@ export const getTopGames = () => {
 };
 
 export const searchGame = (game) => {
-    return new Promise((resolve, reject) => {
-        axios
-            .get("https://api.rawg.io/api/games?search=" + game)
-            .then((res) => {
-                if (!res || !res.data)
-                    reject({ stat: 500, msg: "Something went wrong" });
-                resolve(res.data.results);
-            })
-            .catch((err) => {
-                reject(err);
-            });
-    });
-}
+  return new Promise((resolve, reject) => {
+    axios
+      .get("https://api.rawg.io/api/games?search=" + game)
+      .then((res) => {
+        if (!res || !res.data)
+          reject({ stat: 500, msg: "Something went wrong" });
+        resolve(res.data.results);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
 
 export const getGameDetails = (game) => {
-    return new Promise((resolve, reject) => {
-        axios
-            .get("https://api.rawg.io/api/games/" + game.id)
-            .then((res) => {
-                if (!res || !res.data)
-                    reject({ stat: 500, msg: "Something went wrong" });
-                const info = res.data;
-                resolve({ ...game, info });
-            })
-            .catch((err) => {
-                reject(err);
-            });
-    });
-}
-
+  return new Promise((resolve, reject) => {
+    axios
+      .get("https://api.rawg.io/api/games/" + game.id)
+      .then((res) => {
+        if (!res || !res.data)
+          reject({ stat: 500, msg: "Something went wrong" });
+        const info = res.data;
+        resolve({ ...game, info });
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
 
 //=================================== HELPER FUNCTION ==================================================================
 function getGameInfo(game) {
@@ -152,16 +210,16 @@ function getGameInfo(game) {
         if (res.data.results.length > 0) {
           const info = res.data.results[0];
           axios
-              .get("https://api.rawg.io/api/games/" + info.id)
-              .then((res) => {
-                if (!res || !res.data)
-                  reject({ stat: 500, msg: "Something went wrong" });
-                const info = res.data;
-                resolve({ ...game, info });
-              })
-              .catch((err) => {
-                reject(err);
-              });
+            .get("https://api.rawg.io/api/games/" + info.id)
+            .then((res) => {
+              if (!res || !res.data)
+                reject({ stat: 500, msg: "Something went wrong" });
+              const info = res.data;
+              resolve({ ...game, info });
+            })
+            .catch((err) => {
+              reject(err);
+            });
         } else reject("No game found");
       })
       .catch((err) => {
@@ -171,62 +229,10 @@ function getGameInfo(game) {
 }
 
 //================================== CONNECT TO BACK-END ROUTES =========================================================================
-export const getRecommendations = (id) => {
+export const getRecommendations = (email) => {
   return new Promise((resolve, reject) => {
     axios
-      .get(PREFIX + "/game?id=" + id)
-      .then((res) => {
-        if (!res || !res.data)
-          reject({ stat: 500, msg: "Something went wrong" });
-        resolve(res.data);
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
-};
-
-export const addGame = (id, list, data) => {
-  return new Promise((resolve, reject) => {
-    axios
-      .post(PREFIX + "/game?id=" + id + "&list=" + list, {
-        game_id: data.gameId,
-        title: data.title,
-        genres: data.genres,
-        platform: data.platform,
-      })
-      .then((res) => {
-        if (!res || !res.data)
-          reject({ stat: 500, msg: "Something went wrong" });
-        resolve(res.data);
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
-};
-
-export const deleteGame = (id, list, game) => {
-  return new Promise((resolve, reject) => {
-    axios
-      .patch(PREFIX + "/game?id=" + id + "&list=" + list + "&game=" + game)
-      .then((res) => {
-        if (!res || !res.data)
-          reject({ stat: 500, msg: "Something went wrong" });
-        resolve(res.data);
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
-};
-
-export const rateGame = (id, game, rating) => {
-  return new Promise((resolve, reject) => {
-    axios
-      .patch(PREFIX + "/game?id=" + id + "&game=" + game, {
-        rating: rating,
-      })
+      .get(PREFIX + "/game?email=" + email)
       .then((res) => {
         if (!res || !res.data)
           reject({ stat: 500, msg: "Something went wrong" });

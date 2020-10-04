@@ -75,7 +75,7 @@ def predict(user_id):
     return recommendations
 
 
-def added_rating(title, platform, userscore, username):
+def added_rating(title, userscore, username):
     global game_ratings
 
     username_exist = username in game_ratings['Username'].unique()
@@ -91,7 +91,6 @@ def added_rating(title, platform, userscore, username):
         title_id = game_ratings[game_ratings['Title'] == title]['TitleId'].values[0]
 
     new_row = {'Title': title,
-               'Platform': platform,
                'Userscore': userscore,
                'Username': username,  # for gameo users, usernames will be their email
                'UserId': user_id,
@@ -139,25 +138,7 @@ def add_user():
     User.insert_one(post_data)
     return jsonify({'user': post_data})
 
-@app.route('/game', methods=["POST"])
-def add_game():
-    _id = request.args.get('id') #user ID
-    add_to_list = request.args.get('list')
-    if add_to_list != ('games' or 'wishlist'):
-        abort(404)
-    req_body = request.get_json()
-    post_data = {
-        'game_id': req_body['id'], #not MongoDB ID
-        'title': req_body['title'],
-        'genres': req_body['genres'],
-        'platform': req_body['platform'],
-        'rating':None
-    }
 
-    user = User.find_one_and_update({'_id':_id},{'$push': {add_to_list: post_data}})
-    if not user:
-        abort(404)
-    return jsonify({'user': user})
 
 
 # ====================================== GET METHODS ==================================================
@@ -172,47 +153,72 @@ def get_user():
 
 @app.route('/game', methods=["GET"])
 def get_game():
-    _id = request.args.get('id') #user ID
+    email = request.args.get('email') #user ID
 
-    user = User.find_one({'_id': _id})
+    user = User.find_one({'email': email})
     if not user:
         abort(404)
 
     # get new recommendations
-    return jsonify(predict(_id))
+    return jsonify(predict(email))
 
 # ====================================== PATCH METHODS ==================================================
 @app.route('/game', methods=["PATCH"])
+def add_game():
+    email = request.args.get('email') #user ID
+    add_to_list = request.args.get('list')
+    if add_to_list != 'games' and add_to_list != 'wishlist':
+        print("bo list")
+        abort(400)
+    req_body = request.get_json()
+    post_data = {
+        'game_id': req_body['game_id'], #not MongoDB ID
+        'title': req_body['title'],
+        'rating': None
+    }
+
+    user = User.find_one_and_update({'email': email}, {'$push': {add_to_list: post_data}})
+    if not user:
+        print("bo user")
+        abort(404)
+    return jsonify({'user': user})
+
+@app.route('/remove', methods=["PATCH"])
 def delete_game():
-    _id = request.args.get('id') #user ID
-    game_id = request.args.get('game') #game ID
+    email = request.args.get('email')
+    game_id = request.args.get('game')
     remove_from_list = request.args.get('list')
 
-    if remove_from_list != ('games' or 'wishlist'):
+    if remove_from_list != 'games' and remove_from_list != 'wishlist':
+        print("bo list")
         abort(404)
 
-    user = User.find_one_and_update({'_id':_id},{'$pull': {remove_from_list: {'game_id': game_id}}})
+    user = User.find_one_and_update({'email': email}, {'$pull': {'games': {'game_id': game_id}}})
+
+    print(user)
+
     if not user:
+        print("bo user")
         abort(404)
     return jsonify({'user': user})
 
 @app.route('/rate', methods=["PATCH"])
 def rate_game():
-    _id = request.args.get('id') #user ID
+    email = request.args.get('email')
     game_id = request.args.get('game') #game ID
     req_body = request.get_json()
     rating = req_body['rating']
-    user = User.find_one_and_update({'_id':_id, 'games.game_id': game_id},{'$set': { "games.$.rating" : rating}})
+    user = User.find_one_and_update({'email': email, 'games.game_id': game_id},{'$set': { "games.$.rating" : rating}})
     if not user:
         abort(404)
     
-    user_with_game = User.find_one({'_id': _id, 'games': {'$elemMatch': {'game_id': game_id}}})
+    user_with_game = User.find_one({'email': email, 'games': {'$elemMatch': {'game_id': game_id}}})
     # returns {_id:userID, games:[{_id: gameID, title: title, genres: genres, platform: platform, rating: rating }]}
 
     game = user_with_game['games'][0]
 
     # append rated game to data frame
-    added_rating(game['title'], game['platform'], game['rating'], game['email'])
+    added_rating(game['title'], game['rating'], game['email'])
     
     # re train model
     train()
