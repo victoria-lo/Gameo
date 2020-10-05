@@ -14,8 +14,7 @@ import Nav from "./components/Nav";
 import SignIn from "./components/SignIn";
 import SideBar from "./components/SideBar";
 import Trending from "./components/Trending";
-import Library from "./components/Library";
-import Wishlist from "./components/Wishlist";
+import GameList from "./components/GameList";
 
 function App() {
   const store = createStore(reducers, applyMiddleware(thunk));
@@ -30,8 +29,8 @@ function App() {
                       <Route exact path="/" component={Home} />
                       <Route exact path="/signin" component={SignIn} />
                       <Route exact path="/trending" component={Trending} />
-                      <Route exact path="/library" component={Library} />
-                      <Route exact path="/wishlist" component={Wishlist} />
+                      <Route exact path="/library" component={() => <GameList list="games"/>}/>
+                      <Route exact path="/wishlist" component={() => <GameList list="wishlist"/>} />
                       <Route
                           path="*"
                           render={() => (

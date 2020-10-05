@@ -185,15 +185,15 @@ export const searchGame = (game) => {
   });
 };
 
-export const getGameDetails = (game) => {
+export const getGameDetails = (game, gameId) => {
   return new Promise((resolve, reject) => {
     axios
-      .get("https://api.rawg.io/api/games/" + game.id)
+      .get("https://api.rawg.io/api/games/" + gameId)
       .then((res) => {
         if (!res || !res.data)
           reject({ stat: 500, msg: "Something went wrong" });
         const info = res.data;
-        resolve({ ...game, info });
+        resolve({...game, info});
       })
       .catch((err) => {
         reject(err);

@@ -156,6 +156,17 @@ a:active {
   padding: 0.5em;
 }
 
+#game-card-alt {
+  margin: 1em;
+  max-width: 500px;
+  border: 1px solid #61dafb;
+  height: 20em;
+}
+
+#game-card-alt .title{
+  padding: 0.5em;
+}
+
 #account-dropdown {
   margin-right: 1em;
   margin-left: auto;

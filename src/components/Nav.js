@@ -54,7 +54,7 @@ function Nav(props) {
                 placeholder="Search"
                 data={games}
                 onSelect={record => {
-                    getGameDetails(record)
+                    getGameDetails(record, record.id)
                         .then(data => {
                             setGame(data)
                             setShowModal(true);

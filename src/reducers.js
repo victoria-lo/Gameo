@@ -6,8 +6,6 @@ export const initialState = {
         games: [],
         wishlist: [],
     },
-    users: [],
-    games: []
 };
 
 export default (state = initialState, action) => {
@@ -16,16 +14,6 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 userData: action.payload,
-            };
-        case "USERS":
-            return {
-                ...state,
-                users: action.payload,
-            };
-        case "GAMES":
-            return {
-                ...state,
-                games: action.payload,
             };
         default:
             return state;

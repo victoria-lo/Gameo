@@ -103,7 +103,7 @@ function GameInfo(props) {
     >
       <Modal.Body>
         <Container>
-          <h1>{props.game.name}</h1>
+          <h1>{props.game.info.name}</h1>
           <Row>
             <Col xs={12} md={8}>
               <div
