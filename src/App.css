@@ -152,7 +152,7 @@ a:active {
   height: 33em;
 }
 
-#game-card .title{
+#game-card .title {
   padding: 0.5em;
 }
 
@@ -163,7 +163,7 @@ a:active {
   height: 20em;
 }
 
-#game-card-alt .title{
+#game-card-alt .title {
   padding: 0.5em;
 }
 
@@ -195,8 +195,12 @@ a:active {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 #loading-screen {
@@ -226,3 +230,12 @@ a:active {
   border-top: none !important;
 }
 
+#rate-game .modal-content {
+  background-color: #191919;
+  color: white;
+  border: 1px solid #61dafb;
+}
+
+#rate-game .modal-content .close {
+  color: white !important;
+}

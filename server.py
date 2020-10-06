@@ -204,23 +204,24 @@ def delete_game():
 @app.route('/rate', methods=["PATCH"])
 def rate_game():
     email = request.args.get('email')
-    game_id = request.args.get('game') #game ID
-    req_body = request.get_json()
-    rating = req_body['rating']
-    user = User.find_one_and_update({'email': email, 'games.game_id': game_id},{'$set': { "games.$.rating" : rating}})
+    new_list = request.get_json()['list']
+
+    user = User.find_one_and_update({'email': email}, {'$set': {'games': new_list}})
+    print(user)
     if not user:
+        print("bo user")
         abort(404)
     
-    user_with_game = User.find_one({'email': email, 'games': {'$elemMatch': {'game_id': game_id}}})
+    #user_with_game = User.find_one({'email': email, 'games': {'$elemMatch': {'game_id': game_id}}})
     # returns {_id:userID, games:[{_id: gameID, title: title, genres: genres, platform: platform, rating: rating }]}
-
-    game = user_with_game['games'][0]
+    #print(user_with_game)
+    #game = user_with_game['games'][0]
 
     # append rated game to data frame
-    added_rating(game['title'], game['rating'], game['email'])
+    #added_rating(game['title'], game['rating'], game['email'])
     
     # re train model
-    train()
+    #train()
 
     return jsonify({'user': user})
 

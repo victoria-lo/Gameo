@@ -50,11 +50,9 @@ export const addGame = (email, list, data) => {
 export const deleteGame = (email, newlist) => {
   return (dispatch) => {
     axios
-      .patch(
-        PREFIX + "/remove?email=" + email, {
-            list: newlist
-          }
-      )
+      .patch(PREFIX + "/remove?email=" + email, {
+        list: newlist,
+      })
       .then((res) => {
         return res.data;
       })
@@ -67,11 +65,11 @@ export const deleteGame = (email, newlist) => {
   };
 };
 
-export const rateGame = (email, game, rating) => {
+export const rateGame = (email, newList) => {
   return (dispatch) => {
     axios
-      .patch(PREFIX + "/game?id=" + email + "&game=" + game, {
-        rating: rating,
+      .patch(PREFIX + "/rate?email=" + email, {
+        list: newList,
       })
       .then((res) => {
         return res.data;
@@ -193,7 +191,7 @@ export const getGameDetails = (game, gameId) => {
         if (!res || !res.data)
           reject({ stat: 500, msg: "Something went wrong" });
         const info = res.data;
-        resolve({...game, info});
+        resolve({ ...game, info });
       })
       .catch((err) => {
         reject(err);

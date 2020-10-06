@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "../App.css";
 import { Button, Col, Container, Image, Modal, Row } from "react-bootstrap";
 import DOMPurify from "dompurify";
-import { addGame, rateGame, deleteGame } from "../actions/index";
+import { addGame, deleteGame } from "../actions/index";
 import { AuthContext } from "../Firebase/context.js";
 import { connect } from "react-redux";
 
@@ -25,7 +25,7 @@ function GameInfo(props) {
     if (user == null) {
       window.location.replace("/signin");
     } else {
-      console.log(list)
+      console.log(list);
       props.deleteGame(props.userData.email, list);
     }
   };
@@ -36,8 +36,9 @@ function GameInfo(props) {
         let removedGame = props.userData.games.filter(
           (gam) => gam.game_id !== game.info.id
         );
-        if (removedGame.length !== props.userData.games.length) { // game exists in library
-          const newList = {games: removedGame}
+        if (removedGame.length !== props.userData.games.length) {
+          // game exists in library
+          const newList = { games: removedGame };
           return (
             <Button
               style={{ marginRight: "1em" }}
@@ -66,8 +67,9 @@ function GameInfo(props) {
         let removedGame = props.userData.wishlist.filter(
           (gam) => gam.game_id !== game.info.id
         );
-        if (removedGame.length !== props.userData.wishlist.length) { // game exists in wishlist
-          const newList = {wishlist: removedGame}
+        if (removedGame.length !== props.userData.wishlist.length) {
+          // game exists in wishlist
+          const newList = { wishlist: removedGame };
           return (
             <Button
               className="App-button"
@@ -123,10 +125,6 @@ function GameInfo(props) {
             <Col xs={6} md={4}>
               {displayAddButton(props.game, "games")}
               {displayAddButton(props.game, "wishlist")}
-
-              <p className="App-link" style={{ marginTop: "1em" }}>
-                Rate this game
-              </p>
             </Col>
           </Row>
           <Row>
@@ -217,6 +215,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { addGame, rateGame, deleteGame })(
-  GameInfo
-);
+export default connect(mapStateToProps, { addGame, deleteGame })(GameInfo);
