@@ -17,42 +17,57 @@ This documentation serves as a tutorial for how Gameo is built and used. Please 
 
 ## Prerequisites
 
-The following prerequisites are essential to follow this tutorial:
+Because this tutorial is aimed towards more advanced programmers, the following prerequisites are essential to follow this tutorial:
 
 - Basic to intermediate understanding in React
 - Intermediate to advanced understanding in JavaScript and Python
 - Basic understanding in Machine Learning
 
+## Topics Covered
+
+:::note
+
+Before following the tutorial, you should have the following:
+
+- A starter app created with Create React App
+- Python 3.8 installed in your machine
+- IDE for Python and JavaScript
+
+:::
+
+This tutorial will cover the following topics in order:
+
+### [1. PyTorch Integration and Implementation](collab.md)
+
+- Collaborative Filtering: How our Recommendation System works
+- Setting Up PyTorch, loading dataset and cleaning the data
+- Implementing the Model: Training data, building with PyTorch
+- Exporting Model for use
+
+### [2. MongoDB Integration and Endpoints](endpoint-summary.md)
+
+- Integrating a MongoDB Atlas Database with Python (PyMongo)
+- Creating database endpoints for updates to user data
+
+### 3. Creating Gameo Website with React
+
+- Fetch and display data from API
+- Save user game ratings
+- Fetch recommended games for each user
+
+## Technologies Used
+
+- React 16.13.1
+- React Bootstrap 1.3.0
+- Redux 4.0.5
+- Python 3.8
+- Python Flask 1.1.2
+- Pymongo 3.11.0
+- Pandas 1.1.3
+
 ---
 
-## Emphasis
-
-Emphasis, aka italics, with _asterisks_ or _underscores_.
-
-Strong emphasis, aka bold, with **asterisks** or **underscores**.
-
-Combined emphasis with **asterisks and _underscores_**.
-
-Strikethrough uses two tildes. ~~Scratch this.~~
-
----
-
-## Lists
-
-1. First ordered list item
-1. Another item
-   - Unordered sub-list.
-1. Actual numbers don't matter, just that it's a number
-   1. Ordered sub-list
-1. And another item.
-
-- Unordered list can use asterisks
-
-* Or minuses
-
-- Or pluses
-
----
+Just some Markdown syntax help below. WILL NOT BE INCLUDED IN DOCUMENTATION.
 
 ## Links
 

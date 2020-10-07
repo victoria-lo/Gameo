@@ -2,14 +2,21 @@ module.exports = {
   someSidebar: {
     Introduction: ["prerequisites", "usage"],
     "PyTorch Integration": ["collaborative-filtering", "setup", "training"],
-    Endpoints: [
+    "MongoDB Integration": [
       "endpoint-summary",
-      "create-user",
-      "get-user",
-      "get-recommend",
-      "add-game",
-      "delete-game",
-      "rate-game",
+      "mongodb-setup",
+      {
+        type: "category",
+        label: "Endpoints",
+        items: [
+          "create-user",
+          "get-user",
+          "get-recommend",
+          "add-game",
+          "delete-game",
+          "rate-game",
+        ],
+      },
     ],
   },
 };

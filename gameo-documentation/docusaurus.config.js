@@ -1,6 +1,6 @@
 module.exports = {
   title: "Gameo",
-  tagline: "There's a game for anyone",
+  tagline: "There's a Game for Everyone",
   url: "https://your-docusaurus-test-site.com",
   baseUrl: "/",
   onBrokenLinks: "throw",
@@ -36,12 +36,12 @@ module.exports = {
               to: "docs/",
             },
             {
-              label: "PyTorch",
+              label: "PyTorch Integration",
               to: "docs/collaborative-filtering/",
             },
             {
-              label: "Endpoints",
-              to: "docs/endpoint-summary/",
+              label: "MongoDB Integration and Endpoints",
+              to: "docs/overview/",
             },
           ],
         },

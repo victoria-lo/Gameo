@@ -3,7 +3,7 @@ title: About
 description: About
 ---
 
-# Gameo - There's a game for anyone
+# Gameo - There's a Game for Everyone
 
 Games are a form of entertainment and pleasure to many of us.
 
@@ -25,11 +25,11 @@ Start using Gameo at https://gameo.herokuapp.com
 
 Gameo uses the following resources:
 
-- **Twitch API**, which allows Gameo to fetch the newest and trending games. Official documentation can be found here: https://dev.twitch.tv/docs/api/
+- **Twitch API**, which allows Gameo to fetch the newest and trending games. Official documentation can be found [here](https://dev.twitch.tv/docs/api/).
 
-- **RAWG API**, which allows Gameo to access detailed information for each game. Official documentation can be found here: https://rawg.io/apidocs
+- **RAWG API**, which allows Gameo to access detailed information for each game. Official documentation can be found [here](https://rawg.io/apidocs).
 
-- **Metacritic Video Game Dataset**, which is used for training the model: https://www.kaggle.com/dahlia25/metacritic-video-game-comments
+- **Metacritic Video Game Dataset**, which is used for training the model can be found [here](https://www.kaggle.com/dahlia25/metacritic-video-game-comments).
 
 ## Tech Stack
 
