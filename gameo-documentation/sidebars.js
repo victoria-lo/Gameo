@@ -1,6 +1,15 @@
 module.exports = {
   someSidebar: {
-    Docusaurus: ['doc1', 'doc2', 'doc3'],
-    Features: ['mdx'],
+    Introduction: ["prerequisites", "usage"],
+    "PyTorch Integration": ["collaborative-filtering", "setup", "training"],
+    Endpoints: [
+      "endpoint-summary",
+      "create-user",
+      "get-user",
+      "get-recommend",
+      "add-game",
+      "delete-game",
+      "rate-game",
+    ],
   },
 };

@@ -1,37 +1,35 @@
 ---
-id: doc1
-title: Style Guide
-sidebar_label: Style Guide
+id: prerequisites
+title: Overview
 slug: /
 ---
 
-You can write content using [GitHub-flavored Markdown syntax](https://github.github.com/gfm/).
+Gameo is a game recommendation engine that helps anyone to discover and play games. Using a matrix factorization-based model built with PyTorch, Gameo recommends users games via collaborative filtering.
 
-## Markdown Syntax
+Gameo started as a project built for [Facebook's 2020 Developer Circles Community Challenge](https://developercircles2020.devpost.com/?utm_source=social-facebook&utm_medium=devc&utm_campaign=organic&utm_content=post-url&utm_offering=business-tools&utm_product=DevC-CommunityChallenge-Launch_09102020&utm_event=2020DevCCommunityChallengeLaunch&eventSource=OrganicSocialDevC).
 
-To serve as an example page when styling markdown based Docusaurus sites.
+## About This Documentation
 
-## Headers
+This documentation serves as a tutorial for how Gameo is built and used. Please read the tutorial in the order presented in the navigation sidebar. To read the tutorial in other languages, please select the version below:
 
-# H1 - Create the best documentation
+- English
+- Bahasa Indonesia
 
-## H2 - Create the best documentation
+## Prerequisites
 
-### H3 - Create the best documentation
+The following prerequisites are essential to follow this tutorial:
 
-#### H4 - Create the best documentation
-
-##### H5 - Create the best documentation
-
-###### H6 - Create the best documentation
+- Basic to intermediate understanding in React
+- Intermediate to advanced understanding in JavaScript and Python
+- Basic understanding in Machine Learning
 
 ---
 
 ## Emphasis
 
-Emphasis, aka italics, with *asterisks* or _underscores_.
+Emphasis, aka italics, with _asterisks_ or _underscores_.
 
-Strong emphasis, aka bold, with **asterisks** or __underscores__.
+Strong emphasis, aka bold, with **asterisks** or **underscores**.
 
 Combined emphasis with **asterisks and _underscores_**.
 
@@ -48,11 +46,11 @@ Strikethrough uses two tildes. ~~Scratch this.~~
    1. Ordered sub-list
 1. And another item.
 
-* Unordered list can use asterisks
+- Unordered list can use asterisks
 
-- Or minuses
+* Or minuses
 
-+ Or pluses
+- Or pluses
 
 ---
 
@@ -82,11 +80,11 @@ Some text to show that the reference links can follow later.
 
 Here's our logo (hover to see the title text):
 
-Inline-style: ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png 'Logo Title Text 1')
+Inline-style: ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
 
 Reference-style: ![alt text][logo]
 
-[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png 'Logo Title Text 2'
+[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
 
 Images from any folder can be used by providing path to file. Path should be relative to markdown file.
 
@@ -97,7 +95,7 @@ Images from any folder can be used by providing path to file. Path should be rel
 ## Code
 
 ```javascript
-var s = 'JavaScript syntax highlighting';
+var s = "JavaScript syntax highlighting";
 alert(s);
 ```
 
@@ -113,7 +111,7 @@ But let's throw in a <b>tag</b>.
 
 ```js {2}
 function highlightMe() {
-  console.log('This line can be highlighted!');
+  console.log("This line can be highlighted!");
 }
 ```
 
