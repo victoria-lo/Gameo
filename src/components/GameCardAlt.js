@@ -86,7 +86,6 @@ function GameCardAlt(props) {
                 as="select"
                 onChange={(e) => setRate(e.target.value)}
               >
-                <option>None</option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
