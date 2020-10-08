@@ -38,7 +38,7 @@ function GameList(props) {
     ) : (
       <div className="App-color" style={{ paddingTop: "8em" }}>
         <h4>{`You currently have no games in your ${
-          props.list == "games" ? "library" : "wishlist"
+          props.list === "games" ? "library" : "wishlist"
         }.`}</h4>
       </div>
     )

@@ -65,10 +65,10 @@ export const deleteGame = (email, newlist) => {
   };
 };
 
-export const rateGame = (email, newList) => {
+export const rateGame = (email, gameId, newList) => {
   return (dispatch) => {
     axios
-      .patch(PREFIX + "/rate?email=" + email, {
+      .patch(PREFIX + "/rate?email=" + email + "&gameId=" + gameId, {
         list: newList,
       })
       .then((res) => {
