@@ -128,7 +128,7 @@ export const getTopGames = () => {
             topGames = topGames.filter(
               (el) =>
                 !notGames.find(
-                  (rm) => rm.name === el.name || el.name === "Slots"
+                  (rm) => rm.name === el.name || el.name === "Slots" || el.name === "Games + Demos"
                 )
             );
             axios
