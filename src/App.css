@@ -158,7 +158,7 @@ a:active {
 
 #game-card-alt {
   margin: 1em;
-  max-width: 500px;
+  width: 322px;
   border: 1px solid #61dafb;
   height: 20em;
 }

@@ -15,6 +15,7 @@ import SignIn from "./components/SignIn";
 import SideBar from "./components/SideBar";
 import Trending from "./components/Trending";
 import GameList from "./components/GameList";
+import Recommendations from "./components/Recommendations";
 
 function App() {
   const store = createStore(reducers, applyMiddleware(thunk));
@@ -31,6 +32,7 @@ function App() {
                       <Route exact path="/trending" component={Trending} />
                       <Route exact path="/library" component={() => <GameList list="games"/>}/>
                       <Route exact path="/wishlist" component={() => <GameList list="wishlist"/>} />
+                      <Route exact path="/recommendations" component={Recommendations} />
                       <Route
                           path="*"
                           render={() => (

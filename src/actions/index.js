@@ -128,7 +128,7 @@ export const getTopGames = () => {
             topGames = topGames.filter(
               (el) =>
                 !notGames.find(
-                  (rm) => rm.name === el.name || el.name === "Slots"
+                  (rm) => rm.name === el.name || el.name === "Slots" || el.name === "Games + Demos"
                 )
             );
             axios
@@ -200,7 +200,7 @@ export const getGameDetails = (game, gameId) => {
 };
 
 //=================================== HELPER FUNCTION ==================================================================
-function getGameInfo(game) {
+export const getGameInfo = game => {
   return new Promise((resolve, reject) => {
     axios
       .get("https://api.rawg.io/api/games?search=" + game.name)
