@@ -1,5 +1,3 @@
-from abc import ABC
-
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -78,11 +76,18 @@ def predict(user_id):
 def added_rating(title, userscore, username):
     global game_ratings
 
+    i = -1
+
     username_exist = username in game_ratings['Username'].unique()
     if not username_exist:
         user_id = len(game_ratings['Username'].unique())
     else:
         user_id = game_ratings[game_ratings['Username'] == username]['UserId'].values[0]
+        user_ratings = game_ratings[game_ratings['Username'] == username]['Title'].values
+        try:
+            i = list(user_ratings).index(title)
+        except ValueError:
+            print("Game hasn't been rated by this user.")
 
     game_exist = username in game_ratings['Title'].unique()
     if not game_exist:
@@ -90,14 +95,23 @@ def added_rating(title, userscore, username):
     else:
         title_id = game_ratings[game_ratings['Title'] == title]['TitleId'].values[0]
 
-    new_row = {'Title': title,
-               'Userscore': userscore,
-               'Username': username,  # for gameo users, usernames will be their email
-               'UserId': user_id,
-               'TitleId': title_id}
-    # append row to the dataframe
-    game_ratings = game_ratings.append(new_row, ignore_index=True)
-    game_ratings.to_csv('game_ratings.csv')  # overwrite new changes
+    if i == -1:
+        new_row = pd.DataFrame({"Title": [title],
+                                "Userscore": [userscore],
+                                "Username": [username], # for gameo users, usernames will be their email
+                                "UserId": [user_id],
+                                "TitleId": [title_id]
+                                })
+
+        # append row to the dataframe
+        game_ratings = game_ratings.append(new_row, ignore_index=True)
+        print("new row", game_ratings)
+    else:
+        row_index = list(game_ratings[game_ratings['Username'] == username]['Title'].index)[i]
+        game_ratings.at[row_index, 'Userscore'] = userscore  # edit rating
+        print("edit row", game_ratings)
+
+    game_ratings.to_csv('game_ratings.csv', index=False)  # overwrite new changes
 
 
 # define a custom encoder point to the json_util provided by pymongo (or its dependency bson)
@@ -204,24 +218,22 @@ def delete_game():
 @app.route('/rate', methods=["PATCH"])
 def rate_game():
     email = request.args.get('email')
+    game_id = request.args.get('gameId')
     new_list = request.get_json()['list']
 
     user = User.find_one_and_update({'email': email}, {'$set': {'games': new_list}})
-    print(user)
+
     if not user:
         print("bo user")
         abort(404)
-    
-    #user_with_game = User.find_one({'email': email, 'games': {'$elemMatch': {'game_id': game_id}}})
-    # returns {_id:userID, games:[{_id: gameID, title: title, genres: genres, platform: platform, rating: rating }]}
-    #print(user_with_game)
-    #game = user_with_game['games'][0]
 
-    # append rated game to data frame
-    #added_rating(game['title'], game['rating'], game['email'])
-    
+    for game in new_list:
+        if int(game['game_id']) == int(game_id):
+            # update rating to dataframe
+            added_rating(game['title'], int(game['rating']), email)
+
     # re train model
-    #train()
+    train()
 
     return jsonify({'user': user})
 

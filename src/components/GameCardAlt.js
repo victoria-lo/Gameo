@@ -17,7 +17,7 @@ function GameCardAlt(props) {
       window.location.replace("/signin");
     } else {
       setShow(false);
-      if (rate == 0) {
+      if (rate === 0) {
         setRate(null);
       }
 
@@ -26,7 +26,7 @@ function GameCardAlt(props) {
           gam.rating = rate;
         }
       });
-      props.rateGame(props.userData.email, props.userData.games);
+      props.rateGame(props.userData.email, game.info.id, props.userData.games);
     }
 
     console.log(props.userData.email, props.userData.games);
@@ -55,7 +55,7 @@ function GameCardAlt(props) {
       ))}
       <Row style={{ marginTop: "1em" }}>
         <Col>
-          {props.list == "games" ? (
+          {props.list === "games" ? (
             <Button className="App-button" onClick={() => setShow(true)}>
               {props.game.rating != null
                 ? `Current Rating: ${props.game.rating}`
