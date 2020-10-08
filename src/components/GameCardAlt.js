@@ -38,7 +38,7 @@ function GameCardAlt(props) {
     >
       <Image
         src={props.game.info.background_image}
-        style={{ maxWidth: "20em" }}
+        style={{ maxWidth: "20em", maxHeight: "180px" }}
       />
       <h5
         className="App-link title"
@@ -86,7 +86,7 @@ function GameCardAlt(props) {
                 as="select"
                 onChange={(e) => setRate(e.target.value)}
               >
-                <option>0</option>
+                <option>None</option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>

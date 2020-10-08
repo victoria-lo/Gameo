@@ -4,7 +4,6 @@ import torch.nn.functional as F
 import pandas as pd
 
 import os
-from threading import Thread
 from flask import Flask, jsonify, request, abort
 from flask_cors import CORS
 from pymongo import MongoClient
@@ -34,8 +33,8 @@ class MF(nn.Module):
 
 
 game_ratings = pd.read_csv("game_ratings.csv")
-num_users = len(game_ratings['Username'].unique())
-num_games = len(game_ratings['Title'].unique())
+num_users = len(game_ratings['UserId'].unique())
+num_games = len(game_ratings['TitleId'].unique())
 model = MF(num_users, num_games, emb_size=100)
 
 
@@ -60,17 +59,18 @@ def train_epocs(model, epochs=10, lr=0.01, wd=0.0, unsqueeze=False):
 
 def train():
     global model
-    model = MF(len(game_ratings['Username'].unique()), len(game_ratings['Title'].unique()), emb_size=100)
+    model = MF(len(game_ratings['UserId'].unique()), len(game_ratings['TitleId'].unique()), emb_size=100)
     train_epocs(model, epochs=10, lr=0.01)
 
 
-def predict(user_id):
+def predict(email):
+    user_id = game_ratings[game_ratings['Username'] == email]['UserId'].values[0]
     user = torch.tensor([user_id])
     games = torch.tensor(game_ratings['TitleId'].unique().tolist())
     predictions = model(user, games)
     sort_by_indices = predictions.argsort()
     recommendations = game_ratings['Title'].unique()[sort_by_indices][:30]
-    return recommendations
+    return list(recommendations)
 
 
 def added_rating(title, userscore, username):
@@ -89,7 +89,7 @@ def added_rating(title, userscore, username):
         except ValueError:
             print("Game hasn't been rated by this user.")
 
-    game_exist = username in game_ratings['Title'].unique()
+    game_exist = title in game_ratings['Title'].unique()
     if not game_exist:
         title_id = len(game_ratings['Title'].unique())
     else:
@@ -240,5 +240,5 @@ def rate_game():
 
 if __name__ == "__main__":
     # Only for debugging while developing
-    Thread(target=train).start()
+    train()
     app.run(host='0.0.0.0', debug=False, port=os.environ.get('PORT', 80))

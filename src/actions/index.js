@@ -200,7 +200,7 @@ export const getGameDetails = (game, gameId) => {
 };
 
 //=================================== HELPER FUNCTION ==================================================================
-function getGameInfo(game) {
+export const getGameInfo = game => {
   return new Promise((resolve, reject) => {
     axios
       .get("https://api.rawg.io/api/games?search=" + game.name)
