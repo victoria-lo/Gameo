@@ -18,6 +18,7 @@ module.exports = {
           position: "left",
         },
         { to: "about", label: "About", position: "left" },
+        { to: "usage", label: "Usage", position: "left" },
         {
           href: "https://github.com/steffy-lo/Gameo",
           label: "GitHub",

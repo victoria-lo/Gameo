@@ -1,22 +1,16 @@
 module.exports = {
   someSidebar: {
-    Introduction: ["prerequisites", "usage"],
+    Introduction: ["prerequisites"],
     "PyTorch Integration": ["collaborative-filtering", "setup", "training"],
-    "MongoDB Integration": [
+    Endpoints: [
       "endpoint-summary",
-      "mongodb-setup",
-      {
-        type: "category",
-        label: "Endpoints",
-        items: [
-          "create-user",
-          "get-user",
-          "get-recommend",
-          "add-game",
-          "delete-game",
-          "rate-game",
-        ],
-      },
+      "create-user",
+      "get-user",
+      "get-recommend",
+      "add-game",
+      "delete-game",
+      "rate-game",
     ],
+    "React Website": ["api-usage", "update-recommend"],
   },
 };

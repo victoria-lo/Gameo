@@ -40,26 +40,22 @@ This tutorial will cover the following topics in order:
 ### [1. PyTorch Integration and Implementation](collab.md)
 
 - Collaborative Filtering: How our Recommendation System works
-- Setting Up PyTorch, loading dataset and cleaning the data
+- Preparing dataset and PyTorch setup
 - Implementing the Model: Training data, building with PyTorch
-- Exporting Model for use
 
-### [2. MongoDB Integration and Endpoints](endpoint-summary.md)
+### [2. Endpoints for User Data](endpoint-summary.md)
 
-- Integrating a MongoDB Atlas Database with Python (PyMongo)
-- Creating database endpoints for updates to user data
+- Database endpoints for updates to user data stored in MongoDB Atlas
 
-### 3. Creating Gameo Website with React
+### [3. Creating Gameo Website with React](api-usage)
 
-- Fetch and display data from API
-- Save user game ratings
+- Fetch and display data from APIs
+- Save and update user game ratings
 - Fetch recommended games for each user
 
 ## Technologies Used
 
 - React 16.13.1
-- React Bootstrap 1.3.0
-- Redux 4.0.5
 - Python 3.8
 - Python Flask 1.1.2
 - Pymongo 3.11.0

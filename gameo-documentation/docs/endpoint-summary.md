@@ -4,7 +4,7 @@ title: Overview
 slug: /overview
 ---
 
-## User Database
+## User Data Schema
 
 All Gameo users will create an account, which is stored in a database cloud sevice called [MongoDB Atlas](https://www.mongodb.com/cloud/atlas). A typical user in Gameo will have the following data stored:
 

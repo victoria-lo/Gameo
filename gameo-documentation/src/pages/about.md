@@ -29,7 +29,7 @@ Gameo uses the following resources:
 
 - **RAWG API**, which allows Gameo to access detailed information for each game. Official documentation can be found [here](https://rawg.io/apidocs).
 
-- **Metacritic Video Game Dataset**, which is used for training the model can be found [here](https://www.kaggle.com/dahlia25/metacritic-video-game-comments).
+- **Metacritic Game Dataset** and **Metacritic User Comments Dataset**, which are used for training the model can be found [here](https://www.kaggle.com/dahlia25/metacritic-video-game-comments).
 
 ## Tech Stack
 
