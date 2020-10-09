@@ -44,7 +44,7 @@ a:active {
 
 .App-header {
   background-color: #282c34;
-  min-height: 5vh;
+  height: 3.5em;
   text-align: left;
   display: flex;
   align-items: center;
@@ -60,7 +60,7 @@ a:active {
 #sidebar {
   position: fixed;
   background-color: #282c34 !important;
-  top: 5vh;
+  top: 4em;
   height: 100%;
   width: 15em;
   text-align: left !important;

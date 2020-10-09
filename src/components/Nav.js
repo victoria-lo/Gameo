@@ -49,7 +49,7 @@ function Nav(props) {
                     <FontAwesomeIcon icon={faGamepad} size={'2x'}/>
                 </Link>
             </div>
-            <div style={{ float: 'left', top: '0.7em', left: '35em', width: '50%', zIndex: '100', position: 'absolute'}}>
+            <div style={{ margin: 'auto', paddingLeft: '1em', paddingRight: '1em', width: '50%', zIndex: '100', position: 'relative'}}>
             <ReactSearchBox
                 placeholder="Search"
                 data={games}
