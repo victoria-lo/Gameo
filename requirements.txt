@@ -1,23 +1,23 @@
 certifi==2020.6.20
-cffi @ file:///C:/ci/cffi_1600699246375/work
+cffi
 click==7.1.2
 dnspython==1.16.0
 Flask==1.1.2
-Flask-Cors @ file:///tmp/build/80754af9/flask-cors_1598886879133/work
+Flask-Cors
 itsdangerous==1.1.0
 Jinja2==2.11.2
 MarkupSafe==1.1.1
 mkl-fft==1.2.0
 mkl-random==1.1.0
 mkl-service==2.3.0
-numpy @ file:///C:/ci/numpy_and_numpy_base_1596215850360/work
-pandas @ file:///C:/ci/pandas_1598371563714/work
-pycparser @ file:///tmp/build/80754af9/pycparser_1594388511720/work
+numpy
+pandas
+pycparser
 pymongo==3.11.0
 python-dateutil==2.8.1
 python-dotenv==0.14.0
 pytz==2020.1
 six==1.15.0
-torch @ file:///C:/ci/pytorch_1596373105144/work
+torch
 Werkzeug==1.0.1
 wincertstore==0.2
