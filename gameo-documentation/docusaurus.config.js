@@ -41,8 +41,12 @@ module.exports = {
               to: "docs/collaborative-filtering/",
             },
             {
-              label: "MongoDB Integration and Endpoints",
+              label: "Creating Endpoints",
               to: "docs/overview/",
+            },
+            {
+              label: "Building the React Website",
+              to: "docs/api-usage/",
             },
           ],
         },
@@ -59,7 +63,7 @@ module.exports = {
             },
             {
               label: "Usage",
-              to: "docs/usage/",
+              to: "usage",
             },
           ],
         },
