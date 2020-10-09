@@ -6,10 +6,10 @@ Flask==1.1.2
 Flask-Cors
 itsdangerous==1.1.0
 Jinja2==2.11.2
-MarkupSafe==1.1.1
+MarkupSafe
 mkl-fft
-mkl-random==1.1.0
-mkl-service==2.3.0
+mkl-random
+mkl-service
 numpy
 pandas
 pycparser
