@@ -11,7 +11,7 @@ According to a [market study](https://www.grandviewresearch.com/industry-analysi
 
 Gameo aims to become the number 1 game recommendation engine for anyone to use. At Gameo, we believe that there is a game for anyone. Whether or not you have played video games before, Gameo will have a game for you.
 
-Start using Gameo at https://gameo.herokuapp.com
+Start using Gameo at https://gameo-app.herokuapp.com
 
 ## Main Features
 
@@ -36,4 +36,4 @@ Gameo uses the following resources:
 - Languages: Python, JavaScript, HTML, CSS
 - Frameworks: ReactJS, Python Flask
 - Database: MongoDB
-- APIs/Other: Twitch API, RAWG API, Firebase Authentication, Progressive Web App (PWA)
+- APIs/Other: Twitch API, RAWG API, Firebase Authentication
