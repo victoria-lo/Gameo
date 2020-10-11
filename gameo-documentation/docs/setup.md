@@ -24,7 +24,7 @@ To keep our recommendation engine up-to-date, we are only interested in game tit
 
 First we import pandas, a Python package used for data manipulation and analysis.
 
-```
+```python
 import pandas as pd
 ```
 
@@ -32,20 +32,20 @@ import pandas as pd
 
 Then, we use pandas to read our dataset file that we have imported.
 
-```
+```python
 games_df = pd.read_csv("game_info.csv")
 ```
 
 This dataset contains some Year values that are null. Select only those that are not null and after the year 2010.
 
-```
+```python
 games_df = games_df[games_df['Year'].notnull()]
 games_df=games_df.loc[games_df.Year>=2010.0].reset_index(drop=True)
 ```
 
 Finally, let's remove the 'Unnamed' column since it is redundant and rename our cleaned up dataframe to `df`.
 
-```
+```python
 df = games_df.drop(columns=['Unnamed'], axis=1)
 ```
 
@@ -71,19 +71,19 @@ This dataset contains user ratings and comments for specific games. We are inter
 
 Same the previous dataset, we use pandas to read the data file.
 
-```
+```python
 user_df=pd.read_csv("metacritic_game_user_comments.csv")
 ```
 
 Then we remove the columns we don't need.
 
-```
+```python
 user_df = user_df.drop(columns=['Unnamed', 'Platform','Comment'], axis=1)
 ```
 
 And we select only the data with Title that exists in `df` Title column, because we only want user ratings for games after 2010. The final cleaned dataframe is called `users`.
 
-```
+```python
 users = user_df.loc[user_df['Title'].isin(df['Title'])].reset_index(drop=True)
 ```
 
@@ -103,7 +103,7 @@ In order to work with the dataset easily, it is better to use continuous ids to 
 
 We can create a function to encode a pandas columns with ids.
 
-```
+```python
 def encode_column(column):
     """ Encodes a pandas column with continous IDs"""
     keys = column.unique()
@@ -115,7 +115,7 @@ def encode_column(column):
 
 Then, encode the `users` dataframe for the `Title` and `Username` columns with the following function.
 
-```
+```python
 def encode_df(users):
    """Encodes rating data with continuous user and game title ids"""
    game_ids, users['TitleId'], num_games = encode_column(users['Title'])
@@ -127,7 +127,7 @@ def encode_df(users):
 
 Execute the function and export the new dataset to csv.
 
-```
+```python
 users, num_users, num_games, user_ids, game_ids = encode_df(users)
 users.to_csv('game_ratings.csv')
 ```
