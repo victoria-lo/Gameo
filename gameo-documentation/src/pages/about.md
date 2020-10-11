@@ -3,7 +3,9 @@ title: About
 description: About
 ---
 
-# Gameo - There's a Game for Everyone
+![logo](../../static/img/gameo-logo.png)
+
+# There's a Game for Everyone
 
 Games are a form of entertainment and pleasure to many of us.
 
@@ -37,3 +39,18 @@ Gameo uses the following resources:
 - Frameworks: ReactJS, Python Flask
 - Database: MongoDB
 - APIs/Other: Twitch API, RAWG API, Firebase Authentication
+
+## How it Works
+
+To read how Gameo is built in a detailed tutorial, start [here](../../docs/).
+
+Quick Access to tutorial sections:
+
+- [Introduction](../../docs/)
+- [PyTorch Integration](../../docs/collab.md)
+- [Endpoints for User Data](../../docs/overview.md)
+- [Building the React Website](../../docs/api-usage.md)
+
+## Usage
+
+To learn how to use Gameo as a user, read [Usage](usage).
