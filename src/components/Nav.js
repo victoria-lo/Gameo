@@ -89,10 +89,6 @@ function Nav(props) {
                             <FontAwesomeIcon icon={faSignOutAlt}/>{" "}
                             Sign out
                         </Dropdown.Item>
-                        <Dropdown.Item>
-                            <FontAwesomeIcon icon={faCog}/>{" "}
-                            Settings
-                        </Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
             ) : (
