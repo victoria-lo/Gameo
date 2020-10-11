@@ -4,7 +4,7 @@ title: Implementing the Model
 slug: /implementing-the-model
 ---
 
-:::note
+:::important
 
 Before following the tutorial, you should have:
 
@@ -45,12 +45,12 @@ class MF(nn.Module):
 ```
 
 To instantiate our model, we can simply call on it like so:
-```python
-model = MF(num_users, num_items, emb_size=100)
-```
 :::note
 The variables **num_users** and **num_items** represent the number of unique users and unique items in the dataset respectively.
 :::
+```python
+model = MF(num_users, num_items, emb_size=100)
+```
 Currently, this is what the dataset looks like:
 
 ![dataset.PNG](https://cdn.hashnode.com/res/hashnode/image/upload/v1602020247881/bfBpkQD4Z.png)

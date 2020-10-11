@@ -31,7 +31,7 @@ A class of collaborative filtering algorithm that we'll be looking at is called 
 Starting with our original matrix of only known ratings, we want to determine the two factor matrices that would produce our original matrix. These two matrices would in turn represent information of the users, items, and the relationships between them. One being the matrix that quantitatively represent the users (user matrix), where each row of the matrix is a vector of size *k* that represents a single user, and the other being the item matrix, where each column is a vector of size *k* that represents a single item. 
 
 :::important
-*k* is called the embedding size and is a hyperparameter that is tuned in the matrix factorization model. A larger embedding size would allow for the model to capture more complex relationships and information, but may lead to overfitting.
+***k*** is called the **embedding size** and is a **hyperparameter** that is tuned in the matrix factorization model. A larger embedding size would allow for the model to capture more complex relationships and information, but may lead to **overfitting**.
 :::
 
 ![mf.PNG](https://cdn.hashnode.com/res/hashnode/image/upload/v1602012678397/oVxbAaNJc.png)
