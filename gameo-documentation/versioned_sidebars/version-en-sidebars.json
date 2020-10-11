@@ -1,0 +1,21 @@
+  
+{
+    "version-en/docs": [
+      {
+        
+            "Introduction": ["version-en/intro"],
+            "PyTorch Integration": ["version-en/collaborative-filtering", "version-en/setup", "version-en/training"],
+            "Endpoints": [
+              "version-en/endpoint-summary",
+              "version-en/create-user",
+              "version-en/get-user",
+              "version-en/get-recommend",
+              "version-en/add-game",
+              "version-en/delete-game",
+              "version-en/rate-game"
+            ],
+            "React Website": ["version-en/api-usage", "version-en/update-recommend"]
+        }
+      
+    ]
+}

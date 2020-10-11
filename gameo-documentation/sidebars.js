@@ -1,6 +1,6 @@
 module.exports = {
-  someSidebar: {
-    Introduction: ["prerequisites"],
+  docs: {
+    Introduction: ["en"],
     "PyTorch Integration": ["collaborative-filtering", "setup", "training"],
     Endpoints: [
       "endpoint-summary",

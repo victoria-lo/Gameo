@@ -1,7 +1,7 @@
 ---
-id: en
+id: intro
 title: Overview
-slug: /en
+slug: /
 ---
 
 Gameo is a game recommendation engine that helps anyone to discover and play games. Using a matrix factorization-based model built with PyTorch, Gameo recommends users games via collaborative filtering.

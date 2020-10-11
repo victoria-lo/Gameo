@@ -9,16 +9,34 @@ module.exports = {
   projectName: "gameo", // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: "Gameo",
+      logo: {
+        alt: "Gameo Logo",
+        src: "img/gameo-logo.png",
+        srcDark: "img/gameo-logo.png",
+      },
       items: [
         {
-          to: "docs/",
+          to: "docs/en",
           activeBasePath: "docs",
           label: "How it Works",
           position: "left",
         },
         { to: "about", label: "About", position: "left" },
         { to: "usage", label: "Usage", position: "left" },
+        {
+          label: "Languages",
+          position: "right",
+          items: [
+            {
+              label: "English",
+              to: "docs/en",
+            },
+            {
+              label: "Bahasa Indonesia",
+              to: "docs/id",
+            },
+          ],
+        },
         {
           href: "https://github.com/steffy-lo/Gameo",
           label: "GitHub",
