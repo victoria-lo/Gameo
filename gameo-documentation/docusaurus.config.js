@@ -33,7 +33,7 @@ module.exports = {
             },
             {
               label: "Bahasa Indonesia",
-              to: "docs/id",
+              to: "docs/id/",
             },
           ],
         },

@@ -12,8 +12,8 @@ Gameo started as a project built for [Facebook's 2020 Developer Circles Communit
 
 This documentation serves as a tutorial for how Gameo is built and used. Please read the tutorial in the order presented in the navigation sidebar. To read the tutorial in other languages, please select the version below:
 
-- English
-- Bahasa Indonesia
+- [English](./en)
+- [Indonesian](./id/)
 
 ## Prerequisites
 

@@ -3,10 +3,16 @@ id: usage
 title: Usage
 ---
 
-## Trending
+![login](../../static/img/register.PNG)
 
-## Library
+# Trending
 
-## Wishlist
+![trending](../../static/img/trending.PNG)
 
-## Recommendations
+# Library
+
+![lib](../../static/img/add-lib.PNG)
+
+# Wishlist
+
+# Recommendations

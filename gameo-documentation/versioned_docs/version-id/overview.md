@@ -12,8 +12,8 @@ Gameo dimulai sebagai proyek yang dibangun untuk [Tantangan Komunitas Developer 
 
 Dokumentasi ini berfungsi sebagai tutorial tentang bagaimana Gameo dibuat dan digunakan. Silakan baca tutorial dalam urutan yang disajikan di sidebar navigasi. Untuk membaca tutorial dalam bahasa lain, pilih versi di bawah ini:
 
-- Inggris
-- Bahasa Indonesia
+- [Inggris](../en)
+- [Bahasa Indonesia](./)
 
 ## Prasyarat
 
