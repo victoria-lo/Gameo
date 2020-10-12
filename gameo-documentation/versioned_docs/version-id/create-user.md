@@ -1,21 +1,22 @@
 ---
 id: create-user
-title: Create User
+title: Buat Pengguna
+slug: /buat-pengguna
 ---
 
 :::note
 
-This tutorial assumes you already have a server.py file with Python Flask and PyMongo set up. If you haven't already, read the [Overview](endpoint-summary.md) before reading this section.
+Tutorial ini mengasumsikan Anda sudah memiliki file server.py dengan Python Flask dan pengaturan PyMongo. Jika Anda belum melakukannya, baca [Gambaran](./gambaran) sebelum membaca bagian ini.
 
 :::
 
-When a new user creates a Gameo account, we create and add this new user to the database with the following steps:
+Ketika pengguna baru membuat akun Gameo, kami membuat dan menambahkan pengguna baru ini ke database dengan langkah-langkah berikut:
 
-1. The request sends the user's email and name for the new user data.
-2. The games and wishlist properties are initialized as empty arrays.
-3. Finally, using the MongoDB method `insert_one`, we can add the new user to the database.
+1. Permintaan mengirimkan email dan nama pengguna untuk data pengguna baru.
+2. Properti game dan wishlist diinisialisasi sebagai array kosong.
+3. Terakhir, dengan menggunakan metode MongoDB `insert_one`, kita dapat menambahkan pengguna baru ke database.
 
-The code will be as follows:
+Kodenya adalah sebagai berikut:
 
 ```python
 @app.route('/user', methods=["POST"])

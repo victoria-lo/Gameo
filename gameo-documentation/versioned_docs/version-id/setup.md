@@ -1,107 +1,107 @@
 ---
 id: setup
-title: Preparing Dataset for PyTorch
-slug: /preparing-dataset-for-pytorch
+title: Mempersiapkan Set Data untuk PyTorch
+slug: /mempersiapkan-set-data-untuk-pytorch
 ---
 
-## Cleaning Up Datasets
+## Membersihkan Set Data
 
-We are using 2 datasets to build the PyTorch model.
+Kami menggunakan 2 set data untuk membangun model PyTorch.
 
-### 1. Metacritic Game Info Dataset
+### 1. Set Data Info Game Metakritik
 
-This dataset contains all video games published from 1998-2018. Here's a snippet of what it looks like:
+Kumpulan data ini berisi semua video game yang diterbitkan dari 1998-2018. Berikut cuplikan tampilannya:
 
-| Unnamed | 0   | Title                                | Year | Publisher              | Genre                                     | Platform       | Metascore | Avg_Userscore | No_Players |
-| ------- | --- | ------------------------------------ | ---- | ---------------------- | ----------------------------------------- | -------------- | --------- | ------------- | ---------- |
-| 0       | 0   | The Legend of Zelda: Ocarina of Time | 1998 | Nintendo               | Action Adventure;Fantasy                  | Nintendo64     | 99        | 9.1           | 1 Player   |
-| 1       | 1   | Tony Hawk's Pro Skater 2             | 2000 | NeversoftEntertainment | Sports;Alternative;Skateboarding          | PlayStation 98 | 7.4       | 1-2           |
-| 2       | 2   | Grand Theft Auto IV                  | 2008 | RockstarNorth          | Action Adventure;Modern;Modern;Open-World | PlayStation3   | 98        | 7.5           | 1 Player   |
+| Unnamed | 0   | Judul                                | Tahun | Penerbit               | Genre                                     | Platform       | Metascore | Avg_Userscore | No_Players |
+| ------- | --- | ------------------------------------ | ----- | ---------------------- | ----------------------------------------- | -------------- | --------- | ------------- | ---------- |
+| 0       | 0   | The Legend of Zelda: Ocarina of Time | 1998  | Nintendo               | Action Adventure;Fantasy                  | Nintendo64     | 99        | 9.1           | 1 Player   |
+| 1       | 1   | Tony Hawk's Pro Skater 2             | 2000  | NeversoftEntertainment | Sports;Alternative;Skateboarding          | PlayStation 98 | 7.4       | 1-2           |
+| 2       | 2   | Grand Theft Auto IV                  | 2008  | RockstarNorth          | Action Adventure;Modern;Modern;Open-World | PlayStation3   | 98        | 7.5           | 1 Player   |
 
-To keep our recommendation engine up-to-date, we are only interested in game titles after the year 2010. So let's clean up this dataset.
+Agar mesin rekomendasi kami tetap up-to-date, kami hanya tertarik pada judul game setelah tahun 2010. Jadi mari kita bersihkan dataset ini.
 
-#### Import pandas
+#### Impor pandas
 
-First we import pandas, a Python package used for data manipulation and analysis.
+Pertama kita mengimpor panda, paket Python yang digunakan untuk manipulasi dan analisis data.
 
 ```python
 import pandas as pd
 ```
 
-#### Read and Filter Data
+#### Membaca dan Memfilter Data
 
-Then, we use pandas to read our dataset file that we have imported.
+Kemudian, kami menggunakan panda untuk membaca file dataset yang telah kami impor.
 
 ```python
 games_df = pd.read_csv("game_info.csv")
 ```
 
-This dataset contains some Year values that are null. Select only those that are not null and after the year 2010.
+Kumpulan data ini berisi beberapa nilai Tahun yang nihil. Pilih hanya yang tidak nol dan setelah tahun 2010.
 
 ```python
 games_df = games_df[games_df['Year'].notnull()]
 games_df=games_df.loc[games_df.Year>=2010.0].reset_index(drop=True)
 ```
 
-Finally, let's remove the 'Unnamed' column since it is redundant and rename our cleaned up dataframe to `df`.
+Terakhir, mari kita hapus kolom 'Unnamed' karena itu berlebihan dan ganti nama dataframe yang telah dibersihkan menjadi `df`.
 
 ```python
 df = games_df.drop(columns=['Unnamed'], axis=1)
 ```
 
-Below is a snippet of what `df` looks like:
+Di bawah ini adalah cuplikan dari tampilan `df`:
 
-| Index | Title                | Year | Publisher        | Genre                                     | Platform     | Metascore | Avg_Userscore | No_Players            |
-| ----- | -------------------- | ---- | ---------------- | ----------------------------------------- | ------------ | --------- | ------------- | --------------------- |
-| 0     | Super Mario Galaxy 2 | 2010 | NintendoEADTokyo | Action;Platformer;Platformer;3D           | Wii          | 97        | 9.1           | No Online Multiplayer |
-| 1     | Grand Theft Auto V   | 2014 | RockstarNorth    | Action Adventure;Modern;Open-World        | XboxOne      | 97        | 7.8           | Up to 30              |
-| 2     | Grand Theft Auto V   | 2013 | RockstarNorth    | Modern;Action Adventure;Modern;Open-World | PlayStation3 | 97        | 8.3           | Up to 16              |
+| Indeks | Judul                | Tahun | Penerbit         | Genre                                     | Platform     | Metascore | Avg_Userscore | No_Players            |
+| ------ | -------------------- | ----- | ---------------- | ----------------------------------------- | ------------ | --------- | ------------- | --------------------- |
+| 0      | Super Mario Galaxy 2 | 2010  | NintendoEADTokyo | Action;Platformer;Platformer;3D           | Wii          | 97        | 9.1           | No Online Multiplayer |
+| 1      | Grand Theft Auto V   | 2014  | RockstarNorth    | Action Adventure;Modern;Open-World        | XboxOne      | 97        | 7.8           | Up to 30              |
+| 2      | Grand Theft Auto V   | 2013  | RockstarNorth    | Modern;Action Adventure;Modern;Open-World | PlayStation3 | 97        | 8.3           | Up to 16              |
 
-### 2. Metacritic Game User Ratings
+### 2. Peringkat Pengguna Game Metacritic
 
-This dataset contains user ratings and comments for specific games. We are interested in only looking at the game titles in our `df`, `username` and the `userscore` columns. Before clean up, the dataset looks like this snippet:
+Kumpulan data ini berisi penilaian dan komentar pengguna untuk game tertentu. Kami hanya tertarik untuk melihat judul game di kolom `df`, `username` dan `userscore` kami. Sebelum dibersihkan, kumpulan data tersebut terlihat seperti cuplikan berikut:
 
-| Unnamed | 0   | Title                                | Platform   | Userscore | Comment                                           | Username   |
-| ------- | --- | ------------------------------------ | ---------- | --------- | ------------------------------------------------- | ---------- |
-| 0       | 0   | The Legend of Zelda: Ocarina of Time | Nintendo64 | 10        | Everything in OoT is so near at perfection, it... | SirCaestus |
-| 1       | 1   | The Legend of Zelda: Ocarina of Time | Nintendo64 | 10        | I won't bore you with what everyone is already... | Kaistlin   |
-| 2       | 2   | The Legend of Zelda: Ocarina of Time | Nintendo64 | 10        | Anyone who gives the masterpiece below a 7 or ... | Jacody     |
+| Unnamed | 0   | Judul                                | Platform   | Userscore | Komentar                                          | Nama Pengguna |
+| ------- | --- | ------------------------------------ | ---------- | --------- | ------------------------------------------------- | ------------- |
+| 0       | 0   | The Legend of Zelda: Ocarina of Time | Nintendo64 | 10        | Everything in OoT is so near at perfection, it... | SirCaestus    |
+| 1       | 1   | The Legend of Zelda: Ocarina of Time | Nintendo64 | 10        | I won't bore you with what everyone is already... | Kaistlin      |
+| 2       | 2   | The Legend of Zelda: Ocarina of Time | Nintendo64 | 10        | Anyone who gives the masterpiece below a 7 or ... | Jacody        |
 
-#### Read and Filter Data
+#### Membaca dan Memfilter Data
 
-Same the previous dataset, we use pandas to read the data file.
+Sama dengan dataset sebelumnya, kami menggunakan pandas untuk membaca file data.
 
 ```python
 user_df=pd.read_csv("metacritic_game_user_comments.csv")
 ```
 
-Then we remove the columns we don't need.
+Kemudian kami menghapus kolom yang tidak kami butuhkan.
 
 ```python
 user_df = user_df.drop(columns=['Unnamed', 'Platform','Comment'], axis=1)
 ```
 
-And we select only the data with Title that exists in `df` Title column, because we only want user ratings for games after 2010. The final cleaned dataframe is called `users`.
+Dan kami hanya memilih data dengan Judul yang ada di kolom Judul `df`, karena kami hanya ingin peringkat pengguna untuk game setelah 2010. Dataframe terakhir yang dibersihkan disebut `users`.
 
 ```python
 users = user_df.loc[user_df['Title'].isin(df['Title'])].reset_index(drop=True)
 ```
 
-A snippet of the cleaned up dataset looks like:
+Cuplikan dari kumpulan data yang dibersihkan terlihat seperti:
 
-| Index | Title                | Userscore | Username        |
-| ----- | -------------------- | --------- | --------------- |
-| 0     | Super Mario Galaxy 2 | 10        | S.Kumar         |
-| 1     | Super Mario Galaxy 2 | 8         | ThePlasmaQuasar |
-| 2     | Super Mario Galaxy 2 | 10        | juanandesign    |
+| Indeks | Judul                | Userscore | Nama Pengguna   |
+| ------ | -------------------- | --------- | --------------- |
+| 0      | Super Mario Galaxy 2 | 10        | S.Kumar         |
+| 1      | Super Mario Galaxy 2 | 8         | ThePlasmaQuasar |
+| 2      | Super Mario Galaxy 2 | 10        | juanandesign    |
 
-## Export Dataset for Model
+## Ekspor Set Data untuk Model
 
-In order to work with the dataset easily, it is better to use continuous ids to identify game titles and users.
+Untuk bekerja dengan kumpulan data dengan mudah, lebih baik menggunakan id berkelanjutan untuk mengidentifikasi judul dan pengguna game.
 
-### Encode Columns
+### Menyandikan Kolom
 
-We can create a function to encode a pandas columns with ids.
+Kita dapat membuat fungsi untuk menyandikan kolom pandas dengan id.
 
 ```python
 def encode_column(column):
@@ -111,9 +111,9 @@ def encode_column(column):
     return key_to_id, np.array([key_to_id[x] for x in column]), len(keys)
 ```
 
-### Encode Dataframe
+### Menyandikan Bingkai Data
 
-Then, encode the `users` dataframe for the `Title` and `Username` columns with the following function.
+Kemudian, encode dataframe ʻusers`untuk kolom`Title` dan ʻUsername` dengan fungsi berikut.
 
 ```python
 def encode_df(users):
@@ -123,19 +123,19 @@ def encode_df(users):
    return users, num_users, num_games, user_ids, game_ids
 ```
 
-### Export to csv
+### Ekspor ke csv
 
-Execute the function and export the new dataset to csv.
+Jalankan fungsinya dan ekspor dataset baru ke csv.
 
 ```python
 users, num_users, num_games, user_ids, game_ids = encode_df(users)
 users.to_csv('game_ratings.csv')
 ```
 
-This csv file will be used for training and re-training the model with PyTorch. Below is a snippet of it:
+File csv ini akan digunakan untuk melatih dan melatih ulang model dengan PyTorch. Di bawah ini adalah cuplikannya:
 
-| Index | Title                | Userscore | Username        | UserId | TitleId |
-| ----- | -------------------- | --------- | --------------- | ------ | ------- |
-| 0     | Super Mario Galaxy 2 | 10        | S.Kumar         | 0      | 0       |
-| 1     | Super Mario Galaxy 2 | 8         | ThePlasmaQuasar | 1      | 0       |
-| 2     | Super Mario Galaxy 2 | 10        | juanandesign    | 2      | 0       |
+| Indeks | Judul                | Userscore | Nama pengguna   | UserId | TitleId |
+| ------ | -------------------- | --------- | --------------- | ------ | ------- |
+| 0      | Super Mario Galaxy 2 | 10        | S.Kumar         | 0      | 0       |
+| 1      | Super Mario Galaxy 2 | 8         | ThePlasmaQuasar | 1      | 0       |
+| 2      | Super Mario Galaxy 2 | 10        | juanandesign    | 2      | 0       |

@@ -1,21 +1,22 @@
 ---
 id: get-recommend
-title: Get Recommendations
+title: Dapatkan Rekomendasi
+slug: /dapatkan-rekomendasi
 ---
 
 :::note
 
-This tutorial assumes you already have a server.py file with Python Flask and PyMongo set up. If you haven't already, read the [Overview](endpoint-summary.md) before reading this section.
+Tutorial ini mengasumsikan Anda sudah memiliki file server.py dengan Python Flask dan pengaturan PyMongo. Jika Anda belum melakukannya, baca [Gambaran](./gambaran) sebelum membaca bagian ini.
 
 :::
 
-When a user wants to view recommended games, we retrive the information with the following steps:
+Saat pengguna ingin melihat game yang direkomendasikan, kami mengambil informasi dengan langkah-langkah berikut:
 
-1. The request passes the user's email as a query.
-2. Use MongoDB's `find_one` to find the user by email. Return 404 error if not found.
-3. Else, return the result of the `predict` function.
+1. Permintaan melewati email pengguna sebagai kueri.
+2. Gunakan `find_one` MongoDB untuk menemukan pengguna melalui email. Kembalikan kesalahan 404 jika tidak ditemukan.
+3. Jika tidak, kembalikan hasil dari fungsi `prediksi`.
 
-The code will be as follows:
+Kodenya adalah sebagai berikut:
 
 ```python
 @app.route('/game', methods=["GET"])

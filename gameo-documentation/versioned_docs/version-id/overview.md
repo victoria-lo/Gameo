@@ -1,59 +1,59 @@
 ---
 id: intro
-title: Overview
+title: Gambaran
 slug: /
 ---
 
-Gameo is a game recommendation engine that helps anyone to discover and play games. Using a matrix factorization-based model built with PyTorch, Gameo recommends users games via collaborative filtering.
+Gameo adalah mesin rekomendasi game yang membantu siapa saja untuk menemukan dan memainkan game. Menggunakan model berbasis faktorisasi matriks yang dibangun dengan PyTorch, Gameo merekomendasikan pengguna game melalui pemfilteran kolaboratif.
 
-Gameo started as a project built for [Facebook's 2020 Developer Circles Community Challenge](https://developercircles2020.devpost.com/?utm_source=social-facebook&utm_medium=devc&utm_campaign=organic&utm_content=post-url&utm_offering=business-tools&utm_product=DevC-CommunityChallenge-Launch_09102020&utm_event=2020DevCCommunityChallengeLaunch&eventSource=OrganicSocialDevC).
+Gameo dimulai sebagai proyek yang dibangun untuk [Tantangan Komunitas Developer Circles 2020 Facebook](https://developercircles2020.devpost.com/?utm_source=social-facebook&utm_medium=devc&utm_campaign=organic&utm_content=post-url&utm_offering=business-tools&utm_product=DevC-CommunityChallenge-Launch_09102020&utm_event=2020DevCCommunityChallengeLaunch&eventSource=OrganicSocialDevC).
 
-## About This Documentation
+## Tentang Dokumentasi Ini
 
-This documentation serves as a tutorial for how Gameo is built and used. Please read the tutorial in the order presented in the navigation sidebar. To read the tutorial in other languages, please select the version below:
+Dokumentasi ini berfungsi sebagai tutorial tentang bagaimana Gameo dibuat dan digunakan. Silakan baca tutorial dalam urutan yang disajikan di sidebar navigasi. Untuk membaca tutorial dalam bahasa lain, pilih versi di bawah ini:
 
-- English
+- Inggris
 - Bahasa Indonesia
 
-## Prerequisites
+## Prasyarat
 
-Because this tutorial is aimed towards more advanced programmers, the following prerequisites are essential to follow this tutorial:
+Karena tutorial ini ditujukan untuk programmer yang lebih mahir, prasyarat berikut sangat penting untuk mengikuti tutorial ini:
 
-- Basic to intermediate understanding in React
-- Intermediate to advanced understanding in JavaScript and Python
-- Basic understanding in Machine Learning
+- Pemahaman dasar hingga menengah di React
+- Pemahaman menengah hingga mahir dalam JavaScript dan Python
+- Pemahaman dasar dalam Machine Learning
 
-## Topics Covered
+## Topik yang Dicakup
 
 :::note
 
-Before following the tutorial, you should have the following:
+Sebelum mengikuti tutorial, Anda harus memiliki yang berikut:
 
-- A starter app created with Create React App
-- Python 3.8 installed in your machine
-- IDE for Python and JavaScript
+- Sebuah aplikasi pemula dibuat dengan Create React App
+- Python 3.8 diinstal di mesin Anda
+- IDE untuk Python dan JavaScript
 
 :::
 
-This tutorial will cover the following topics in order:
+Tutorial ini akan membahas topik-topik berikut secara berurutan:
 
-### [1. PyTorch Integration and Implementation](collab.md)
+### [1. Integrasi dan Implementasi PyTorch](./pemfilteran-kolaboratif)
 
-- Collaborative Filtering: How our Recommendation System works
-- Preparing dataset and PyTorch setup
-- Implementing the Model: Training data, building with PyTorch
+- Pemfilteran Kolaboratif: Cara kerja Sistem Rekomendasi kami
+- Mempersiapkan set data dan penyiapan PyTorch
+- Menerapkan Model: Data pelatihan, membangun dengan PyTorch
 
-### [2. Endpoints for User Data](endpoint-summary.md)
+### [2. Titik Akhir untuk Data Pengguna](./gambaran)
 
-- Database endpoints for updates to user data stored in MongoDB Atlas
+- Titik akhir database untuk pembaruan data pengguna yang disimpan di MongoDB Atlas
 
-### [3. Creating Gameo Website with React](api-usage)
+### [3. Membuat Website Gameo dengan React](./penggunaan-api)
 
-- Fetch and display data from APIs
-- Save and update user game ratings
-- Fetch recommended games for each user
+- Ambil dan tampilkan data dari API
+- Simpan dan perbarui peringkat game pengguna
+- Ambil game yang direkomendasikan untuk setiap pengguna
 
-## Technologies Used
+## Teknologi yang Digunakan
 
 - React 16.13.1
 - Python 3.8
@@ -63,4 +63,4 @@ This tutorial will cover the following topics in order:
 
 ---
 
-Made with ❤️ by [Victoria](https://github.com/victoria-lo) and [Steffy](https://github.com/steffy-lo).
+Dibuat dengan ❤️ oleh [Victoria](https://github.com/victoria-lo) and [Steffy](https://github.com/steffy-lo).

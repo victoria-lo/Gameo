@@ -1,22 +1,23 @@
 ---
 id: add-game
-title: Add Game
+title: Tambahkan Game
+slug: /tambahkan-game
 ---
 
 :::note
 
-This tutorial assumes you already have a server.py file with Python Flask and PyMongo set up. If you haven't already, read the [Overview](endpoint-summary.md) before reading this section.
+Tutorial ini mengasumsikan Anda sudah memiliki file server.py dengan Python Flask dan pengaturan PyMongo. Jika Anda belum melakukannya, baca [Gambaran](./gambaran) sebelum membaca bagian ini.
 
 :::
 
-When a user adds a game to their library or wishlist, we update their data with the following steps:
+Saat pengguna menambahkan game ke pustaka atau daftar keinginan mereka, kami memperbarui data mereka dengan langkah-langkah berikut:
 
-1. The request passes the user's email and array (i.e. games or wishlist) that is to be updated as queries.
-2. If the list query is neither "games" nor "wishlist", return 400 error.
-3. Else, get the game properties needed to push to the array from the request body. Initialize its rating as None.
-4. Use MongoDB's `find_one_and_update` to find the user by email and push the game to the list specified.
+1. Permintaan melewati email dan array pengguna (yaitu game atau daftar keinginan) yang akan diperbarui sebagai kueri.
+2. Jika kueri daftar bukan "game" atau "wishlist", kembalikan 400 kesalahan.
+3. Lain, dapatkan properti game yang diperlukan untuk mendorong ke array dari isi permintaan. Inisialisasi peringkatnya sebagai Tidak Ada.
+4. Gunakan `find_one_and_update` MongoDB untuk menemukan pengguna melalui email dan mendorong permainan ke daftar yang ditentukan.
 
-The code will be as follows:
+Kodenya adalah sebagai berikut:
 
 ```python
 @app.route('/game', methods=["PATCH"])

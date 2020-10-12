@@ -1,41 +1,47 @@
 ---
 id: collaborative-filtering
-title: Collaborative Filtering
+title: Pemfilteran Kolaboratif
+slug: /pemfilteran-kolaboratif
 ---
 
-Before we get started with the actual implementation, let's go through some concepts with building a recommendation engine.
+Sebelum kita mulai dengan implementasi sebenarnya, mari kita bahas beberapa konsep dengan membuat mesin rekomendasi.
 
-There are essentially 3 types of algorithm that your recommendation engine could use when recommending an item to a user:
+Pada dasarnya ada 3 jenis algoritme yang dapat digunakan mesin rekomendasi Anda saat merekomendasikan item kepada pengguna:
 
-### 1. Demographic Filtering
+### 1. Pemfilteran Demografis
 
-This type of filtering looks at the general trends and popularity of an item based on users with similar demographics. This means that users with similar demographics are recommended the same items and personalized recommendations are very limited.
+Jenis pemfilteran ini melihat tren umum dan popularitas item berdasarkan pengguna dengan demografi serupa. Artinya, pengguna dengan demografi serupa direkomendasikan item yang sama dan rekomendasi yang dipersonalisasi sangat terbatas.
 
-### 2. Content-Based Filtering
+### 2. Pemfilteran Berbasis Konten
 
-The underlying algorithm for this type of filtering looks at the similarity of items based on its metadata. For example, for games, the metadata would be things like platforms, genres, and publisher. Therefore, if a user liked a PC action RPG game that is published by Valve, then most likely he or she would like another game that has similar metadata (i.e., games that are published by Valve and are action RPG PC games). This means that personalized recommendations are now involved, since games that the user liked is used to determine games that the user will probably like too.
+Algoritme yang mendasari untuk jenis pemfilteran ini melihat kesamaan item berdasarkan metadatanya. Misalnya, untuk game, metadatanya berupa platform, genre, dan penerbit. Oleh karena itu, jika pengguna menyukai game RPG aksi PC yang diterbitkan oleh Valve, kemungkinan besar dia akan menyukai game lain yang memiliki metadata serupa (yaitu, game yang diterbitkan oleh Valve dan merupakan game PC RPG aksi). Ini berarti bahwa rekomendasi yang dipersonalisasi sekarang dilibatkan, karena game yang disukai pengguna digunakan untuk menentukan game yang mungkin akan disukai juga oleh pengguna.
 
-The only problem with this type of filtering is the fact that items are recommended in a limited pattern, that is through its metadata.
+Satu-satunya masalah dengan jenis pemfilteran ini adalah kenyataan bahwa item direkomendasikan dalam pola terbatas, yaitu melalui metadatanya.
 
-### 3. Collaborative Filtering
+### 3. Pemfilteran Kolaboratif
 
-The final type of filtering can be broken to two types.
+Jenis penyaringan terakhir dapat dibagi menjadi dua jenis.
 
-- User-based: matches users to items based on other users. Specifically, other users that are determined to be similar to the user by the algorithm. This means given a user and another user that is found to be similar to the user, what the other user liked is recommended to the user.
-- Item-based: matches users to items based on items' similarity with items that the user has rated. This means if a user liked item X, and item X is found to be highly similar to item Y, then item Y will be recommended to the user.
+#### Berbasis Pengguna
 
-The best type of recommendation engine would obviously integrate all 3 types but in this tutorial, we'll focus on the last type: collaborative filtering, since it is arguably the strongest type.
+Mencocokkan pengguna dengan item berdasarkan pengguna lain. Secara khusus, pengguna lain yang ditentukan serupa dengan pengguna menurut algoritme. Ini berarti mengingat pengguna dan pengguna lain yang ditemukan serupa dengan pengguna tersebut, apa yang disukai pengguna lain direkomendasikan kepada pengguna tersebut.
 
-## Matrix Factorization
+#### Berbasis Item
 
-A class of collaborative filtering algorithm that we'll be looking at is called Matrix Factorization. The end goal of matrix factorization is basically to build a matrix of users and items filled with known and predicted ratings.
+Mencocokkan pengguna dengan item berdasarkan kesamaan item dengan item yang telah diberi peringkat oleh pengguna. Ini berarti jika pengguna menyukai item X, dan item X ditemukan sangat mirip dengan item Y, maka item Y akan direkomendasikan kepada pengguna.
+
+Jenis mesin rekomendasi terbaik jelas akan mengintegrasikan semua 3 jenis tetapi dalam tutorial ini, kita akan fokus pada jenis terakhir: pemfilteran kolaboratif, karena ini bisa dibilang jenis yang paling kuat.
+
+## Faktorisasi Matriks
+
+Kelas algoritma pemfilteran kolaboratif yang akan kita lihat disebut Faktorisasi Matriks. Tujuan akhir dari faktorisasi matriks pada dasarnya adalah untuk membangun matriks pengguna dan item yang diisi dengan peringkat yang diketahui dan diprediksi.
 
 ![matrix.PNG](https://cdn.hashnode.com/res/hashnode/image/upload/v1602010200173/AJgPxWM3N.png)
 
-Starting with our original matrix of only known ratings, we want to determine the two factor matrices that would produce our original matrix. These two matrices would in turn represent information of the users, items, and the relationships between them. One being the matrix that quantitatively represent the users (user matrix), where each row of the matrix is a vector of size _k_ that represents a single user, and the other being the item matrix, where each column is a vector of size _k_ that represents a single item.
+Dimulai dengan matriks asli yang hanya memiliki peringkat yang diketahui, kita ingin menentukan dua matriks faktor yang akan menghasilkan matriks asli kita. Kedua matriks ini pada gilirannya akan mewakili informasi pengguna, item, dan hubungan di antara keduanya. Salah satunya adalah matriks yang secara kuantitatif mewakili pengguna (matriks pengguna), di mana setiap baris matriks adalah vektor berukuran _k_ yang mewakili satu pengguna, dan yang lainnya adalah matriks item, di mana setiap kolom adalah vektor berukuran _k_ yang mewakili satu item.
 
 :::important
-**_k_** is called the **embedding size** and is a **hyperparameter** that is tuned in the matrix factorization model. A larger embedding size would allow for the model to capture more complex relationships and information, but may lead to **overfitting**.
+**_ k _** disebut **ukuran embedding** dan merupakan **hyperparameter** yang disetel dalam model faktorisasi matriks. Ukuran sematan yang lebih besar akan memungkinkan model untuk menangkap hubungan dan informasi yang lebih kompleks, tetapi dapat menyebabkan **overfitting**.
 :::
 
 ![mf.PNG](https://cdn.hashnode.com/res/hashnode/image/upload/v1602012678397/oVxbAaNJc.png)

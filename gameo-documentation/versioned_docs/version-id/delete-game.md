@@ -1,21 +1,21 @@
 ---
 id: delete-game
-title: Remove Game
-slug: /remove-game
+title: Hapus Game
+slug: /hapus-game
 ---
 
 :::note
 
-This tutorial assumes you already have a server.py file with Python Flask and PyMongo set up. If you haven't already, read the [Overview](endpoint-summary.md) before reading this section.
+Tutorial ini mengasumsikan Anda sudah memiliki file server.py dengan Python Flask dan pengaturan PyMongo. Jika Anda belum melakukannya, baca [Gambaran](./gambaran) sebelum membaca bagian ini.
 
 :::
 
-When a user removes a game from their library or wishlist, we update their data with the following steps:
+Saat pengguna menghapus game dari pustaka atau daftar keinginan mereka, kami memperbarui data mereka dengan langkah-langkah berikut:
 
-1. The request passes the user's email as a query and a new list with a game removed in the request body.
-2. Use MongoDB's `find_one_and_update` to find the user by email and replace the list with the new list.
+1. Permintaan meneruskan email pengguna sebagai kueri dan daftar baru dengan game yang dihapus di badan permintaan.
+2. Gunakan `find_one_and_update` MongoDB untuk menemukan pengguna melalui email dan mengganti daftar dengan daftar baru.
 
-The code will be as follows:
+Kodenya adalah sebagai berikut:
 
 ```python
 @app.route('/remove', methods=["PATCH"])

@@ -1,6 +1,10 @@
 ---
 id: update-recommend
-title: Updating Recommendations
+title: Memperbarui Rekomendasi
+slug: /memperbarui-rekomendasi
 ---
 
-This is a link to [another document.](setup.md) This is a link to an [external page.](http://www.example.com/)
+Untuk hasil yang lebih baik, pengguna akan diminta untuk **memberi peringkat setidaknya 3 game** sebelum mereka dapat melihatnya
+daftar rekomendasi yang dipersonalisasi.
+
+Setiap rating baru dari sebuah game setelahnya akan [mengirim permintaan](./nilai-game) agar model tersebut dilatih ulang, yang memungkinkan rekomendasi baru yang diperbarui.

@@ -1,22 +1,23 @@
 ---
 id: training
-title: Implementing the Model
-slug: /implementing-the-model
+title: Menerapkan Model
+slug: /menerapkan-model
 ---
 
 :::important
 
-Before following the tutorial, you should have:
+Sebelum mengikuti tutorial, Anda harus memiliki:
 
-- PyTorch installed in your machine. Read instructions [here](https://pytorch.org/get-started/locally/).
-- CSV file with dataset from [Preparing Dataset for PyTorch](setup.md).
+- PyTorch dipasang di mesin Anda. Baca petunjuknya [di sini](https://pytorch.org/get-started/locally/).
+- File CSV dengan set data dari [Mempersiapkan Set Data untuk PyTorch](setup.md).
 
 :::
 
-## Matrix Factorization Model in PyTorch
-Taking the idea of Matrix Factorization, let's implement this in PyTorch.
+## Model Faktorisasi Matriks di PyTorch
 
-First, let's import some necessary modules.
+Mengambil ide dari Faktorisasi Matriks, mari kita terapkan ini di PyTorch.
+
+Pertama, mari impor beberapa modul yang diperlukan.
 
 ```
 import torch
@@ -25,7 +26,7 @@ import torch.nn.functional as F
 from sklearn.model_selection import train_test_split
 ```
 
-Next, let's build our Matrix Factorization Model class.
+Selanjutnya, mari kita buat kelas Model Faktorisasi Matriks.
 
 ```python
 class MF(nn.Module):
@@ -37,27 +38,29 @@ class MF(nn.Module):
         # initializing our matrices with a positive number generally will yield better results
         self.user_emb.weight.data.uniform_(0, 0.5)
         self.item_emb.weight.data.uniform_(0, 0.5)
-        
+
     def forward(self, u, v):
         u = self.user_emb(u)
         v = self.item_emb(v)
         return (u*v).sum(1)  # taking the dot product
 ```
 
-To instantiate our model, we can simply call on it like so:
+Untuk membuat contoh model kita, kita cukup memanggilnya seperti ini:
 :::note
-The variables **num_users** and **num_items** represent the number of unique users and unique items in the dataset respectively.
+Variabel **num_users** dan **num_items** masing-masing mewakili jumlah pengguna unik dan item unik dalam kumpulan data.
 :::
+
 ```python
 model = MF(num_users, num_items, emb_size=100)
 ```
-Currently, this is what the dataset looks like:
+
+Saat ini, seperti inilah kumpulan data tersebut:
 
 ![dataset.PNG](https://cdn.hashnode.com/res/hashnode/image/upload/v1602020247881/bfBpkQD4Z.png)
 
-The items here are games that we want to recommend to users.
+Item di sini adalah game yang ingin kami rekomendasikan kepada pengguna.
 
-Once the model is instantiated, we can proceed to split our dataset to train and test our model. The general split is 20% test and 80% training.
+Setelah model dibuat, kita dapat melanjutkan untuk membagi kumpulan data untuk melatih dan menguji model kita. Pembagian umum adalah tes 20% dan pelatihan 80%.
 
 ```python
 train_df, valid_df = train_test_split(dataset, test_size=0.2)
@@ -67,7 +70,7 @@ train_df = train_df.reset_index(drop=True)
 test_df = valid_df.reset_index(drop=True)
 ```
 
-Now, we want to create our training function to train the model.
+Sekarang, kami ingin membuat fungsi pelatihan untuk melatih model.
 
 ```python
 def train_epocs(model, epochs=10, lr=0.01, wd=0.0):
@@ -86,9 +89,9 @@ def train_epocs(model, epochs=10, lr=0.01, wd=0.0):
     test(model)
 ```
 
-In each iteration, the training function is  updating our model to approach a smaller MSE (mean squared error). This is the idea of gradient descent. 
+Di setiap iterasi, fungsi pelatihan memperbarui model kita untuk mendekati MSE yang lebih kecil (mean squared error). Ini adalah gagasan penurunan gradien.
 
-And finally, we want to create our test function, which will be called right after training is done.
+Dan terakhir, kami ingin membuat fungsi pengujian kami, yang akan dipanggil tepat setelah pelatihan selesai.
 
 ```python
 def test(model):
@@ -101,12 +104,13 @@ def test(model):
     print("test loss %.3f " % loss.item())
 ```
 
-We can see that although our model's lowest MSE in our training dataset was about 3.776, the actual MSE based on our test dataset is about 8.778. Generally, this is a normal result, but a big difference between the training and test MSE likely suggests that our model is overfitted.
+Kami dapat melihat bahwa meskipun MSE terendah model kami dalam kumpulan data pelatihan kami adalah sekitar 3.776, MSE aktual berdasarkan kumpulan data pengujian kami adalah sekitar 8.778. Secara umum, ini adalah hasil yang normal, tetapi perbedaan besar antara MSE pelatihan dan pengujian kemungkinan menunjukkan bahwa model kami terlalu pas.
 
 ![result.PNG](https://cdn.hashnode.com/res/hashnode/image/upload/v1602021212841/Qy7kiRGDS.png)
 
-## Model Prediction
-And now, we are ready to use our model for prediction! For example, to predict the ratings of games for user of user id 10, we can run the following lines:
+## Prediksi Model
+
+Dan sekarang, kami siap menggunakan model kami untuk prediksi! Misalnya, untuk memprediksi rating game untuk pengguna user id 10, kita dapat menjalankan baris berikut:
 
 ```python
 user = torch.tensor([10])
@@ -115,13 +119,15 @@ predictions = model(user, games).tolist()
 print(predictions)
 ```
 
-Notice that some of the predictions went over 10. To fix this, we can simply normalize our results like so:
+Perhatikan bahwa beberapa prediksi melebihi 10. Untuk mengatasinya, kita cukup menormalkan hasil kita seperti ini:
+
 ```python
 normalized_predictions = [i/max(predictions)*10 for i in predictions]
 print(normalized_predictions)
 ```
 
- Finally, we can recommend some games by sorting our predictions list:
+Terakhir, kami dapat merekomendasikan beberapa game dengan mengurutkan daftar prediksi kami:
+
 ```python
 sortedIndices = predictions.argsort()
 recommendations = dataset['Title'].unique()[sortedIndices][:30]  # taking top 30 games

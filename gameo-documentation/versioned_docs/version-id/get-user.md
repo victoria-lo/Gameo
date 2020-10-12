@@ -1,21 +1,22 @@
 ---
 id: get-user
-title: Get User
+title: Dapatkan Pengguna
+slug: /dapatkan-pengguna
 ---
 
 :::note
 
-This tutorial assumes you already have a server.py file with Python Flask and PyMongo set up. If you haven't already, read the [Overview](endpoint-summary.md) before reading this section.
+Tutorial ini mengasumsikan Anda sudah memiliki file server.py dengan Python Flask dan pengaturan PyMongo. Jika Anda belum melakukannya, baca [Gambaran](./gambaran) sebelum membaca bagian ini.
 
 :::
 
-When an existing user signs into Gameo, we get this user from the database with the following steps:
+Ketika pengguna yang sudah ada masuk ke Gameo, kami mendapatkan pengguna ini dari database dengan langkah-langkah berikut:
 
-1. The request passes the user's email or id as queries.
-2. Using MongoDB's `find_one`, find the user data with the corresponding email or id.
-3. Return the user if found, else return 404.
+1. Permintaan melewati email atau id pengguna sebagai kueri.
+2. Dengan menggunakan `find_one` MongoDB, temukan data pengguna dengan email atau id yang sesuai.
+3. Kembalikan pengguna jika ditemukan, jika tidak kembalikan 404.
 
-The code will be as follows:
+Kodenya adalah sebagai berikut:
 
 ```python
 @app.route('/user', methods=["GET"])

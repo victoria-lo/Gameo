@@ -1,21 +1,21 @@
   
 {
-    "version-id/docs": [
-      {
-        
-            "Introduction": ["version-id/intro"],
-            "PyTorch Integration": ["version-id/collaborative-filtering", "version-id/setup", "version-id/training"],
-            "Endpoints": [
-              "version-id/endpoint-summary",
-              "version-id/create-user",
-              "version-id/get-user",
-              "version-id/get-recommend",
-              "version-id/add-game",
-              "version-id/delete-game",
-              "version-id/rate-game"
-            ],
-            "React Website": ["version-id/api-usage", "version-id/update-recommend"]
-        }
+  "version-id/docs": [
+    {
       
-    ]
+          "Introduksi": ["version-id/intro"],
+          "Integrasi PyTorch": ["version-id/collaborative-filtering", "version-id/setup", "version-id/training"],
+          "Titik Akhir": [
+            "version-id/endpoint-summary",
+            "version-id/create-user",
+            "version-id/get-user",
+            "version-id/get-recommend",
+            "version-id/add-game",
+            "version-id/delete-game",
+            "version-id/rate-game"
+          ],
+          "Situs React": ["version-id/api-usage", "version-id/update-recommend"]
+      }
+    
+  ]
 }

@@ -1,21 +1,22 @@
 ---
 id: rate-game
-title: Rate Game
+title: Nilai Game
+slug: /nilai-game
 ---
 
 :::note
 
-This tutorial assumes you already have a server.py file with Python Flask and PyMongo set up. If you haven't already, read the [Overview](endpoint-summary.md) before reading this section.
+Tutorial ini mengasumsikan Anda sudah memiliki file server.py dengan Python Flask dan pengaturan PyMongo. Jika Anda belum melakukannya, baca [Gambaran](./gambaran) sebelum membaca bagian ini.
 
 :::
 
-When a user rates a game in their library, we update their data with the following steps:
+Saat pengguna memberi peringkat game di perpustakaan mereka, kami memperbarui data mereka dengan langkah-langkah berikut:
 
-1. The request passes the user's email and gameId as queries. A new list with a game rated is in the request body.
-2. Use MongoDB's `find_one_and_update` to find the user by email and replace the list with the new list.
-3. Get the rated game from the list and update its rating in the dataframe to re-train our model.
+1. Permintaan melewati email pengguna dan gameId sebagai kueri. Daftar baru dengan peringkat game ada di badan permintaan.
+2. Gunakan `find_one_and_update` MongoDB untuk menemukan pengguna melalui email dan mengganti daftar dengan daftar baru.
+3. Dapatkan game berperingkat dari daftar dan perbarui peringkatnya dalam kerangka data untuk melatih ulang model kita.
 
-The code will be as follows:
+Kodenya adalah sebagai berikut:
 
 ```python
 @app.route('/rate', methods=["PATCH"])
