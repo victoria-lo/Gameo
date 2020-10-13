@@ -44,6 +44,7 @@ function GameInfo(props) {
               style={{ marginRight: "1em" }}
               className="App-button"
               onClick={() => {
+                props.setShowModal(false)
                 deleteFromList(game, newList);
               }}
             >
@@ -56,6 +57,7 @@ function GameInfo(props) {
               style={{ marginRight: "1em" }}
               className="App-button"
               onClick={() => {
+                props.setShowModal(false)
                 addtoList(game, list);
               }}
             >
@@ -74,6 +76,7 @@ function GameInfo(props) {
             <Button
               className="App-button"
               onClick={() => {
+                props.setShowModal(false)
                 deleteFromList(game, newList);
               }}
             >
@@ -85,6 +88,7 @@ function GameInfo(props) {
             <Button
               className="App-button"
               onClick={() => {
+                props.setShowModal(false)
                 addtoList(game, list);
               }}
             >

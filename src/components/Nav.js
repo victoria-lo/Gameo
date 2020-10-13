@@ -6,7 +6,6 @@ import { connect, useDispatch } from "react-redux";
 import app from "../Firebase/config";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCog,
   faGamepad,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
@@ -29,7 +28,6 @@ function Nav(props) {
     if (user) {
       getUser(user.email)
         .then((data) => {
-          console.log(data);
           dispatch({
             type: "USER_DATA",
             payload: data.user,
@@ -43,7 +41,7 @@ function Nav(props) {
           }
         });
     }
-  }, [user, props.userData.email]);
+  }, [user, props.userData]);
 
   return (
     <header className="App-header">

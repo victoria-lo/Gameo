@@ -34,7 +34,7 @@ function GameCardAlt(props) {
   return (
     <div
       id="game-card-alt"
-      style={{ position: "relative", textAlign: "center", height: "22em" }}
+      style={{ position: "relative", textAlign: "center"}}
     >
       <Image
         src={props.game.info.background_image}
