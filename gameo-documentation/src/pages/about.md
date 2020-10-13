@@ -42,14 +42,14 @@ Gameo uses the following resources:
 
 ## How it Works
 
-To read how Gameo is built in a detailed tutorial, start [here](../../docs/).
+To read how Gameo is built in a detailed tutorial, start [here](../../docs/en).
 
 Quick Access to tutorial sections:
 
-- [Introduction](../../docs/)
-- [PyTorch Integration](../../docs/collab.md)
-- [Endpoints for User Data](../../docs/overview.md)
-- [Building the React Website](../../docs/api-usage.md)
+- [Introduction](../../docs/en)
+- [PyTorch Integration](../../docs/collaborative-filtering)
+- [Endpoints for User Data](../../docs/overview)
+- [Building the React Website](../../docs/api-usage)
 
 ## Usage
 
