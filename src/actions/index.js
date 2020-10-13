@@ -38,8 +38,11 @@ export const addGame = (email, list, data) => {
         return res.data;
       })
       .then((data) => {
-        console.log(data);
-        dispatch({ type: "USER_DATA", payload: data });
+        if (list === "games") {
+          dispatch({type: "GAMES", payload: data.user.games});
+        } else {
+          dispatch({type: "WISHLIST", payload: data.user.wishlist});
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -57,7 +60,7 @@ export const deleteGame = (email, newlist) => {
         return res.data;
       })
       .then((data) => {
-        dispatch({ type: "USER_DATA", payload: data });
+        dispatch({ type: "GAMES", payload: data.games });
       })
       .catch((err) => {
         console.log(err);

@@ -15,10 +15,10 @@ function GameList(props) {
         setGames(data);
         setLoaded(true);
       });
-    } else {
+    } else if (props.userData[props.list]){
       setLoaded(true);
     }
-  });
+  }, [props.userData]);
 
   const getDetailedGame = async () => {
     return await Promise.all(

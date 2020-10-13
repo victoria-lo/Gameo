@@ -15,6 +15,16 @@ export default (state = initialState, action) => {
                 ...state,
                 userData: action.payload,
             };
+        case "GAMES":
+            return {
+                ...state,
+                games: action.payload
+            }
+        case "WISHLIST":
+            return {
+                ...state,
+                wishlist: action.payload
+            }
         default:
             return state;
     }
