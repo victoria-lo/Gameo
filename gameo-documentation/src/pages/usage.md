@@ -35,7 +35,7 @@ For a more personalized game recommendation, Gameo users should add games they h
 
 To add a game to Library, simply click on a game on the Trending page to open a pop-up window with the game's information. Then click on the **'Add to Library'** button.
 
-INSERT RATE PIC
+![rate](../../static/img/rate.PNG)
 
 To rate the game you've played, head to the Library page and click **'Rate Game'**. Give a rating from 1 (worst) to 10 (best). Gameo will then better understand your game tastes to recommend games for you using its [Matrix Factorization model](../../docs/implementing-the-model) in PyTorch.
 
@@ -56,6 +56,8 @@ Regardless of the reason, it is simple to add a game to your Wishlist. Simply cl
 # Recommendations
 
 The recommendations page is the highlight feature of Gameo. It displays the personalized games recommended just for you.
+
+![recommend](../../static/img/recommend.PNG)
 
 :::caution
 
