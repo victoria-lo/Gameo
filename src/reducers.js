@@ -18,12 +18,12 @@ export default (state = initialState, action) => {
         case "GAMES":
             return {
                 ...state,
-                games: action.payload
+                userData: { ...state.userData, games: action.payload },
             }
         case "WISHLIST":
             return {
                 ...state,
-                wishlist: action.payload
+                userData: { ...state.userData, wishlist: action.payload },
             }
         default:
             return state;

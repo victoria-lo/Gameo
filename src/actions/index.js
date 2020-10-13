@@ -1,7 +1,7 @@
 import axios from "axios";
 
 /* For local debugging set to 1 */
-const DEBUG = 0;
+const DEBUG = 1;
 
 /* Debug variables.*/
 const PREFIX = DEBUG ? "http://localhost:80" : "";
@@ -60,7 +60,7 @@ export const deleteGame = (email, newlist) => {
         return res.data;
       })
       .then((data) => {
-        dispatch({ type: "GAMES", payload: data.games });
+        dispatch({ type: "GAMES", payload: data.user.games });
       })
       .catch((err) => {
         console.log(err);
@@ -78,7 +78,7 @@ export const rateGame = (email, gameId, newList) => {
         return res.data;
       })
       .then((data) => {
-        dispatch({ type: "USER_DATA", payload: data });
+        dispatch({ type: "GAMES", payload: data.user.games });
       })
       .catch((err) => {
         console.log(err);

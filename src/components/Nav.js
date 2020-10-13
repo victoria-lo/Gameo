@@ -28,10 +28,12 @@ function Nav(props) {
     if (user) {
       getUser(user.email)
         .then((data) => {
-          dispatch({
-            type: "USER_DATA",
-            payload: data.user,
-          });
+            if (JSON.stringify(props.userData) !== JSON.stringify(data.user)) {
+                dispatch({
+                    type: "USER_DATA",
+                    payload: data.user,
+                });
+            }
         })
         .catch((err) => {
           if (err.response.status === 404) {

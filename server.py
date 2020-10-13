@@ -1,3 +1,5 @@
+from threading import Thread
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -221,7 +223,7 @@ def rate_game():
     game_id = request.args.get('gameId')
     new_list = request.get_json()['list']
 
-    user = User.find_one_and_update({'email': email}, {'$set': {'games': new_list}})
+    user = User.find_one_and_update({'email': email}, {'$set': {'games': new_list}}, new=True)
 
     if not user:
         print("bo user")
@@ -233,12 +235,12 @@ def rate_game():
             added_rating(game['title'], int(game['rating']), email)
 
     # re train model
-    train()
+    Thread(target=train).start()
 
     return jsonify({'user': user})
 
 
 if __name__ == "__main__":
     # Only for debugging while developing
-    train()
+    Thread(target=train).start()
     app.run(host='0.0.0.0', debug=False, port=os.environ.get('PORT', 80))
