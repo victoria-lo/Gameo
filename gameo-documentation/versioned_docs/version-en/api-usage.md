@@ -4,9 +4,8 @@ title: API Usage
 slug: /api-usage
 ---
 
-This is a link to [another document.](setup.md) This is a link to an [external page.](http://www.example.com/)
-
 ## Twitch
+
 One of the biggest weakness of collaborative filtering is the **cold start** problem. This problem arises when there is little or no data to work with to predict user preferences.
 This means for new users, we need to find another way to recommend games.
 
@@ -21,13 +20,12 @@ Before using the API, make sure you have your **client id** and **auth token** r
 
 ```javascript
 /* Example using axios */
- axios
-  .get(url, {
-    headers: {
-      "client-id": process.env.REACT_APP_TWITCH_CLIENT_ID,
-      Authorization: "Bearer " + process.env.REACT_APP_TWITCH_AUTH_TOKEN,
-    },
-  })
+axios.get(url, {
+  headers: {
+    "client-id": process.env.REACT_APP_TWITCH_CLIENT_ID,
+    Authorization: "Bearer " + process.env.REACT_APP_TWITCH_AUTH_TOKEN,
+  },
+});
 ```
 
 The route we're using is getting the [Top Games](https://dev.twitch.tv/docs/api/reference#get-top-games).
@@ -39,9 +37,7 @@ Some of the titles that are returned by the Twitch API are not games.
 
 Taking into account that the Twitch API can contain titles that are not actual games (e.g., Just Chatting), the resulting API call we decided to use is taking the top 60 games.
 
-``
-https://api.twitch.tv/helix/games/top?first=60
-``
+`https://api.twitch.tv/helix/games/top?first=60`
 
 To filter out titles that are not actually games, we use another route [Search Categories](https://dev.twitch.tv/docs/api/reference#search-categories).
 Specifically, we want to search for two non-game categories, IRL and creative.
@@ -54,7 +50,7 @@ https://api.twitch.tv/helix/search/categories?query=creative
 Suppose our initial 60 games are stored in an array called **topGames**, and **notGames** is the array containing the results of the above two API calls, then a simple filter would do the trick:
 
 ```javascript
-topGames = topGames.filter(el => !notGames.find(rm => rm.name === el.name))
+topGames = topGames.filter((el) => !notGames.find((rm) => rm.name === el.name));
 ```
 
 These API calls would be made as soon as the component to display this information is mounted. We can achieve this using the useEffect hook like so:
@@ -64,14 +60,13 @@ These API calls would be made as soon as the component to display this informati
 :::
 
 ```javascript
-const [topGames, setTopGames] = useState([])
+const [topGames, setTopGames] = useState([]);
 
 useEffect(() => {
-    getTopGames()
-        .then(result => {
-            setTopGames(result)
-        })
-}, [])
+  getTopGames().then((result) => {
+    setTopGames(result);
+  });
+}, []);
 ```
 
 :::note
@@ -81,6 +76,7 @@ Otherwise, it acts as componentDidUpdate and executes everytime a dependency var
 :::
 
 ## RAWG
+
 Because the Twitch API doesn't provide us the metadata of a game, we decide to use the [RAWG API](https://rawg.io/apidocs) to do the job.
 
 :::note
@@ -88,18 +84,20 @@ Unlike Twitch's API, using the RAWG API doesn't require an auth token or an api 
 :::
 
 First, we'll search for the game using the [Games](https://api.rawg.io/docs/#tag/games) route and passing in a game's name as the search query.
+
 ```
 https://api.rawg.io/api/games?search=" + game.name
 ```
 
 This will return a list of game objects, and the first one on the list is the one we want. Now, we want to do another API call that would provide us the metadata for the game.
 The following snippet of code shows how the promise would look like.
+
 ```javascript
 if (res.data.results.length > 0) {
   const game = res.data.results[0];
   axios
     .get("https://api.rawg.io/api/games/" + game.id)
-    .then(res => {
+    .then((res) => {
       if (res && res.data) {
         const info = res.data;
         resolve(res.data);
