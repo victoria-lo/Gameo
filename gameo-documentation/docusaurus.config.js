@@ -1,7 +1,7 @@
 module.exports = {
   title: "Gameo",
   tagline: "There's a Game for Everyone",
-  url: 'https://steffy-lo.github.io', // Your website URL
+  url: 'https://steffy-lo.github.io/Gameo', // Your website URL
   baseUrl: '/',
   onBrokenLinks: "warn",
   favicon: "img/favicon.ico",
