@@ -44,7 +44,7 @@ function Recommendations(props) {
         );
     };
 
-    return !!user ? <Redirect to={{pathname: "/trending"}}/>
+    return !!user ? <Redirect to={{pathname: "/signin"}}/>
         : (
     loaded ? (
         recommended.length > 0 ? (
