@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useContext} from "react";
 import "../App.css";
 import GameCardAlt from "./GameCardAlt";
 import { connect } from "react-redux";
 import {getGameInfo, getRecommendations} from "../actions";
 import Loading from "./Loading";
+import {Redirect} from "react-router-dom";
+import {AuthContext} from "../Firebase/context";
 
 function Recommendations(props) {
+    const { user } = useContext(AuthContext);
     const [loaded, setLoaded] = useState(false);
     const [recommended, setRecommended] = useState([]);
 
@@ -41,7 +44,9 @@ function Recommendations(props) {
         );
     };
 
-    return loaded ? (
+    return !!user ? <Redirect to={{pathname: "/trending"}}/>
+        : (
+    loaded ? (
         recommended.length > 0 ? (
             <div id="games" style={{ marginLeft: "2em" }}>
                 {recommended.map((game) => (
@@ -55,7 +60,7 @@ function Recommendations(props) {
         )
     ) : (
         <Loading />
-    );
+    ));
 }
 
 const mapStateToProps = (state) => {

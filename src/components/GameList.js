@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useContext} from "react";
 import "../App.css";
 import GameCardAlt from "./GameCardAlt";
 import { connect } from "react-redux";
 import { getGameDetails } from "../actions";
 import Loading from "./Loading";
+import {Redirect} from "react-router-dom";
+import {AuthContext} from "../Firebase/context";
 
 function GameList(props) {
+  const { user } = useContext(AuthContext);
   const [loaded, setLoaded] = useState(false);
   const [games, setGames] = useState([]);
 
@@ -28,23 +31,25 @@ function GameList(props) {
     );
   };
 
-  return loaded ? (
-    props.userData[props.list].length > 0 ? (
-      <div id="games" style={{ marginLeft: "2em" }}>
-        {games.map((game) => (
-          <GameCardAlt game={game} list={props.list} />
-        ))}
-      </div>
+  return !!user ? <Redirect to={{pathname: "/trending"}}/>
+   : (
+    loaded ? (
+        props.userData[props.list].length > 0 ? (
+            <div id="games" style={{marginLeft: "2em"}}>
+              {games.map((game) => (
+                  <GameCardAlt game={game} list={props.list}/>
+              ))}
+            </div>
+        ) : (
+            <div className="App-color" style={{paddingTop: "8em"}}>
+              <h4>{`You currently have no games in your ${
+                  props.list === "games" ? "library" : "wishlist"
+              }.`}</h4>
+            </div>
+        )
     ) : (
-      <div className="App-color" style={{ paddingTop: "8em" }}>
-        <h4>{`You currently have no games in your ${
-          props.list === "games" ? "library" : "wishlist"
-        }.`}</h4>
-      </div>
-    )
-  ) : (
-    <Loading />
-  );
+        <Loading/>
+    ))
 }
 
 const mapStateToProps = (state) => {
