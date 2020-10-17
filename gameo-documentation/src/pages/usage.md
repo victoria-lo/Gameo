@@ -15,7 +15,7 @@ For best experience, Gameo users are advised to use devices with larger screens 
 
 # Create a Gameo account
 
-First, create a Gameo account at https://gameo-app.herokuapp.com. It's free and takes less than 1 minute to create!
+First, create a Gameo account at https://gameo-app.herokuapp.com It's free and takes less than 1 minute to create!
 
 ![login](../../static/img/register.PNG)
 
