@@ -72,7 +72,7 @@ function Home() {
                 "button button--outline button--secondary button--lg",
                 styles.getStarted
               )}
-              to={"/"}
+              to={"https://steffy-lo.github.io/Gameo/"}
             >
               Get Started
             </Link>
