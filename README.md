@@ -1,2 +1,2 @@
 # Documentation
-https://steffy-lo.github.io/Gameo/
+Visit https://victoria-lo.github.io/Gameo/ for detailed documentation made with Docusaurus.
