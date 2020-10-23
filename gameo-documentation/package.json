@@ -7,7 +7,7 @@
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
-    "deploy": "set \"GIT_USER=steffy-lo\" && docusaurus deploy",
+    "deploy": "set \"GIT_USER=victoria-lo\" && docusaurus deploy",
     "serve": "docusaurus serve"
   },
   "dependencies": {
