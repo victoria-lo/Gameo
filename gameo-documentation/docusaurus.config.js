@@ -5,7 +5,7 @@ module.exports = {
   baseUrl: '/Gameo/',
   onBrokenLinks: "warn",
   favicon: "img/favicon.ico",
-  organizationName: "steffy-lo", // Usually your GitHub org/user name.
+  organizationName: "victoria-lo", // Usually your GitHub org/user name.
   projectName: "gameo", // Usually your repo name.
   themeConfig: {
     navbar: {
@@ -38,7 +38,7 @@ module.exports = {
           ],
         },
         {
-          href: "https://github.com/steffy-lo/Gameo",
+          href: "https://github.com/victoria-lo/Gameo",
           label: "GitHub",
           position: "right",
         },
@@ -90,7 +90,7 @@ module.exports = {
           items: [
             {
               label: "GitHub",
-              href: "https://github.com/steffy-lo/Gameo",
+              href: "https://github.com/victoria-lo/Gameo",
             },
           ],
         },
