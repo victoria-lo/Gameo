@@ -10,6 +10,8 @@ Gameo aims to become the number 1 game recommendation engine for anyone to use. 
 
 Start using Gameo at https://gameo-app.herokuapp.com
 
+> Devpost Link: https://devpost.com/software/gameo
+
 ## Main Features
 - See trending games based on how popular it is on Twitch
 - View a personalized recommendation list of games based on games rated
